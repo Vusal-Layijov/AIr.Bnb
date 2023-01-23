@@ -17,7 +17,7 @@ module.exports = {
     await queryInterface.addColumn(options, 'lastName', {
       type: Sequelize.STRING,
       allowNull: false
-    },options)
+    })
   },
 
   async down (queryInterface, Sequelize) {
