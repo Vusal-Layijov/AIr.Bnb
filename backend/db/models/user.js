@@ -22,6 +22,25 @@ module.exports = (sequelize, DataTypes) => {
     }
     static associate(models) {
       // define association here
+      User.belongsToMany(
+        models.Spot,{
+          through:'Booking',
+          foreignKey:'userId',
+          otherKey:'spotId'
+        }
+      )
+      User.belongsToMany(
+        models.Spot, {
+        through: 'Review',
+        foreignKey: 'userId',
+        otherKey: 'spotId'
+      }
+      )
+      User.hasMany(
+        models.Spot,{
+          foreignKey:'ownerId'
+        }
+      )
     }
     static async login({ credential, password }) {
       const { Op } = require('sequelize');
