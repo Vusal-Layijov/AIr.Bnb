@@ -212,6 +212,12 @@ router.post('/:spotId/images',requireAuth, async(req,res,next)=>{
         err.message = 'Spot could not be found'
         next(err)
     }
+    if (spot.ownerId !== req.user.id) {
+        let err = new Error()
+        err.status = 403
+        err.message = 'Forbidden'
+        next(err)
+    }
    // console.log(req.user.id)
     else if(spot.ownerId===req.user.id){
         const{url,preview}=req.body
@@ -229,6 +235,54 @@ router.post('/:spotId/images',requireAuth, async(req,res,next)=>{
             )
     }
  
+})
+router.put('/:spotId', requireAuth,async(req,res,next)=>{
+    let spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        let err = new Error()
+        err.status = 404
+        err.message = 'Spot could not be found'
+        next(err)
+    }
+    if (spot.ownerId !== req.user.id){
+        let err = new Error()
+        err.status = 403
+        err.message = 'Forbidden'
+        next(err)
+    }
+    else if (spot.ownerId === req.user.id){
+        const { address, city, state, country, lat, lng, name, description, price } = req.body
+
+
+        let updatedSpot = await spot.update({
+            address,
+            city, state, country, lat, lng, name, description, price
+        })
+        return res.json(updatedSpot)
+    }
+})
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
+    let spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        let err = new Error()
+        err.status = 404
+        err.message = 'Spot could not be found'
+        next(err)
+    }
+    if (spot.ownerId !== req.user.id) {
+        let err = new Error()
+        err.status = 403
+        err.message = 'Forbidden'
+        next(err)
+    }
+    else if (spot.ownerId === req.user.id) {
+       await spot.destroy()
+        return res.json({
+           message: "Successfully deleted"
+        })
+    }
 })
 
 module.exports = router;
