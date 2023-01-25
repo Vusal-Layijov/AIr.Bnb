@@ -49,15 +49,39 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull:false
     },
-    address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    country: DataTypes.STRING,
-    lat: DataTypes.FLOAT,
-    lng: DataTypes.FLOAT,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.DECIMAL,
+    address: {
+      type: DataTypes.STRING,
+      allowNull:false
+    } ,
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    country: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lat: DataTypes.FLOAT(10,7),
+    lng: DataTypes.FLOAT(10,7),
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        max: 50
+      }
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.DECIMAL,
+      allowNull:false
+    }, 
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
   }, {
