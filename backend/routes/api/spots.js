@@ -6,6 +6,7 @@ const { User,Spot,Review,SpotImage,sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
+const { where } = require('sequelize');
 
 const router = express.Router();
 
@@ -86,21 +87,80 @@ router.get('/', async(req,res)=>{
 
 
 router.get('/current', async(req,res)=>{
-    console.log(req.user.id)
-    let userSpot = await User.findByPk(req.user.id,{
-        include:{
-            model:Spot
-        },
-        attributes:[]
-    })
-   let Spots= userSpot.Spots
+   // console.log(req.user.id)
+   // let userSpots = await User.findByPk(req.user.id
+    //     {
+    //     include:{
+    //         model:Spot,
+    //         include:[
+    //         {
+    //             model: Review,
+    //             attributes: [
+    //                 [sequelize.fn('AVG', sequelize.col('stars')), 'avgstarrating']
+    //             ]
+    //         },
+    //         {
+    //             model:SpotImage,
+    //             where:{preview:true},
+    //             attributes:['url']
+    //         }
+    //     ]
+    //     },
+    //     attributes:[] 
+    // }
+   // )
+    let spots = await Spot.findAll(
+        {where:{ownerId:req.user.id}}
+    )
+    let result = []
+    for (let spot of spots) {
+        let data = await Review.findAll({
+            where: {
+                spotId: spot.id
+            },
+            attributes: [
+                [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating'],
+            ]
+
+        })
+    
+ //  let Spots= userSpots.toJSON()
+        let resData = spot.toJSON()
+        resData.avgRating = data[0].dataValues.avgRating
+        let previewImage = await Spot.findByPk(spot.id, {
+            include: {
+                model: SpotImage,
+                where: {
+                    spotId: spot.id,
+                    preview: true,
+                },
+                attributes: ['url']
+            },
+            attributes: []
+        })
+        resData.previewImage = previewImage.SpotImages[0].url
+        //console.log(previewImage)
+        result.push(resData)
+
+    }
+
+
+    //  console.log(data)
+
     res.json({
-        Spots
+        Spots: result
     })
 })
 
-router.get('/:spotId', async(req,res)=>{
+
+router.get('/:spotId', async(req,res,next)=>{
     let spot = await Spot.findByPk(req.params.spotId)
+    if(!spot) {
+        let err = new Error()
+        err.message='Spot could not be found'
+        err.status=404
+        next(err)
+    }
     let numreview = await Review.count(
         {
         where:{
