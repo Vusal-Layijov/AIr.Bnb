@@ -57,19 +57,19 @@ router.get('/', async(req,res)=>{
         let spott = await Spot.findByPk(spot.id)
         let resData = spott.toJSON()
         resData.avgRating = data.dataValues.avgRating
-        let previewImage = await Spot.findByPk(spot.id,{
-            include:{
-                model:SpotImage,
-                where:{
-                    spotId:spot.id,
-                    preview:true,
-                },
-                attributes: ['url']
-            },
-            attributes:[]
-        })
-        resData.previewImage=previewImage.SpotImages[0].url
-        console.log(previewImage)
+        // let previewImage = await Spot.findByPk(spot.id,{
+        //     include:{
+        //         model:SpotImage,
+        //         where:{
+        //             spotId:spot.id,
+        //             preview:true,
+        //         },
+        //         attributes: ['url']
+        //     },
+        //     attributes:[]
+        // })
+        // resData.previewImage=previewImage.SpotImages[0].url
+        // console.log(previewImage)
         result.push(resData)
 
     }
