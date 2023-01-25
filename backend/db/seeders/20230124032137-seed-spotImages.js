@@ -20,17 +20,17 @@ module.exports = {
    return queryInterface.bulkInsert(options,[
     {
       spotId:1,
-      url:'',
+      url:'umage url',
       preview:true
     },
      {
        spotId: 2,
-       url: '',
+       url: 'image url',
        preview: true
      },
      {
        spotId: 3,
-       url: '',
+       url: 'image url',
        preview: true
      }
    ])
