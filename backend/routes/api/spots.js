@@ -284,5 +284,56 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         })
     }
 })
+router.post('/:spotId/reviews',requireAuth, async(req,res,next)=>{
+    let reviews = await Review.findAll({
+        where:{
+            spotId:req.params.spotId,
+            userId:req.user.id
+        }
+    })
+    if(reviews.length){
+        let err = new Error('User already has a review for this spot')
+        err.status=403
+        next(err)
+    }
+   // console.log(reviews)
+    let spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot) {
+        let err = new Error()
+        err.status = 404
+        err.message = 'Spot could not be found'
+        next(err)
+    }
+ 
+    const { review, stars } = req.body
+    let newReview = await Review.create({
+        spotId: req.params.spotId,
+        userId: req.user.id,
+        review,
+        stars
+    })
+    let data = await Review.findOne({
+        where:{
+            spotId:req.params.spotId,
+            userId:req.user.id
+        },
+        attributes: ['id', 'userId', "spotId", "review", "stars", "createdAt", "updatedAt"]
+    })
+    console.log(data.id)
+    return res.json({
+        id: data.id,
+        userId:data.userId,
+        spotId:data.spotId,
+        review:data.review,
+        stars:data.stars,
+        createdAt:data.createdAt,
+        updatedAt:data.updatedAt
+        
+    }
+    )
+
+
+})
 
 module.exports = router;
