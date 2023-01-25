@@ -7,7 +7,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
 const { where } = require('sequelize');
-
+const { requireAuth } = require('../../utils/auth.js');
 const router = express.Router();
 
 const validateLogin = [
@@ -190,4 +190,17 @@ router.get('/:spotId', async(req,res,next)=>{
     console.log(numreview)
     res.json({...sendData, Owner,SpotImages})
 })
+
+router.post('/', requireAuth, async(req,res,next)=>{
+    const { address,city,state,country,lat,lng,name,description,price} = req.body
+        
+    
+    let spot = await Spot.create({
+        address,
+        ownerId:req.user.id,
+        city, state, country, lat, lng, name, description, price
+    })
+    res.json(spot)
+})
+
 module.exports = router;
