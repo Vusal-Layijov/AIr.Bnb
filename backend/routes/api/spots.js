@@ -83,7 +83,19 @@ router.get('/', async(req,res)=>{
 } )
 
 
-
+router.get('/current', async(req,res)=>{
+    console.log(req.user.id)
+    let userSpot = await User.findByPk(req.user.id,{
+        include:{
+            model:Spot
+        },
+        attributes:[]
+    })
+   let Spots= userSpot.Spots
+    res.json({
+        Spots
+    })
+})
 
 
 module.exports = router;
