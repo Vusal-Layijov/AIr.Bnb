@@ -21,24 +21,33 @@ const validateLogin = [
     handleValidationErrors
 ];
 router.post('/:reviewId/images',requireAuth, async(req,res,next)=>{
-    let review = await Review.findByPk(req.params.reviewId)
+    console.log(typeof(parseInt(req.params.reviewId)))
+    let id = parseInt(req.params.reviewId)
+    let review = await Review.findOne({
+        where:{
+          id:id
+        }
+    }
+        )
     if(!review){
         let err = new Error('Review could not be found')
         err.status=404,
         next(err)
     }
+    let owner = review.userId
     let reviewCount = await ReviewImage.count({
-        where:{reviewId:req.params.reviewId}
+        where:{reviewId:id}
     }
     
     )
-    console.log(reviewCount)
+   // console.log(owner)
     if(reviewCount>10){
         let err = new Error('Maximum number of images for this resource was reached')
         err.status=403
         next(err)
     }
     const{ url} = req.body
+    if(owner===req.user.id){
     let newRevImg = await ReviewImage.create({
         reviewId:req.params.reviewId,
         url
@@ -47,6 +56,11 @@ router.post('/:reviewId/images',requireAuth, async(req,res,next)=>{
         id:newRevImg.id,
         url:newRevImg.url
     } )
+    }
+    else{
+        let err = new Error('Forbidden')
+        next(err)
+    }
 })
 
 
