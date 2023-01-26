@@ -9,6 +9,7 @@ const reviewsRouter = require('./reviews.js')
 const { restoreUser } = require('../../utils/auth.js');
 const { requireAuth } = require('../../utils/auth.js');
 
+const bookingsRouter = require('./bookings.js')
 router.use(restoreUser);
 
 router.use('/session', sessionRouter);
@@ -18,6 +19,8 @@ router.use('/users', usersRouter);
 router.use('/spots', spotsRouter);
 
 router.use('/reviews',reviewsRouter)
+
+router.use('/bookings', bookingsRouter)
 // router.get(
 //     '/restore-user',
 //     (req, res) => {
