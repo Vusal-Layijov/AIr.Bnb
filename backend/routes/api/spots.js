@@ -1,7 +1,7 @@
 const express = require('express')
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User,Spot,Review,SpotImage,sequelize } = require('../../db/models');
+const { User,Spot,Review,SpotImage,sequelize,ReviewImage } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -334,6 +334,17 @@ router.post('/:spotId/reviews',requireAuth, async(req,res,next)=>{
     )
 
 
+})
+router.get('/:spotId/reviews',async(req,res,next)=>{
+    let reviews = await Spot.findByPk(req.params.spotId,{
+        include:
+            {
+                model:Review,
+                include:{ model: ReviewImage }
+            },
+        attributes:[]
+    })
+    res.json(reviews)
 })
 
 module.exports = router;

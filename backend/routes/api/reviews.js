@@ -6,7 +6,7 @@ const { User, Spot, Review, SpotImage, sequelize,ReviewImage } = require('../../
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
-const { where } = require('sequelize');
+const { where, Model } = require('sequelize');
 const { requireAuth } = require('../../utils/auth.js');
 const router = express.Router();
 
@@ -62,8 +62,60 @@ router.post('/:reviewId/images',requireAuth, async(req,res,next)=>{
         next(err)
     }
 })
+router.get('/current',requireAuth, async(req,res,next)=>{
+    //let id = parseInt(req.user.id)
+    let reviews = await Review.findAll({
+        where:{userId:req.user.id},
+        attributes: ['id', 'userId', "spotId", "review", "stars", "createdAt", "updatedAt"],
+    
+                include:{
+                    model:ReviewImage
+                }
+            
+           
+        
+    })
+    res.json(reviews)
+})
 
-
+router.put('/:reviewId', requireAuth, async(req,res,next)=>{
+    console.log(typeof (parseInt(req.params.reviewId)))
+    let id = parseInt(req.params.reviewId)
+    let revieW = await Review.findOne({
+        where: {
+            id: id
+        }
+    }
+    )
+    if (!revieW) {
+        let err = new Error('Review could not be found')
+        err.status = 404,
+            next(err)
+    }
+    let owner = revieW.userId
+    const{review,star}=req.body
+    if (owner === req.user.id) {
+        let updatedReview = await revieW.update({
+            spotId:revieW.spotId,
+            userId:req.user.id,
+            review,
+            star
+        })
+        let result = await Review.findOne({
+            where: {
+                id: id
+            },
+            attributes: ['id', 'userId', "spotId", "review", "stars", "createdAt", "updatedAt"],
+            
+        }
+        )
+        return res.json(result)
+    }
+    else {
+        let err = new Error('Forbidden')
+        next(err)
+    }
+})
 
 
 
