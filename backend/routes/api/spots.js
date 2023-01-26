@@ -410,5 +410,72 @@ router.get('/:spotId/bookings',requireAuth, async(req,res,next)=>{
     }
    
 })
+router.post('/:spotId/bookings',requireAuth, async(req,res,next)=>{
+    let spot = await Spot.findByPk(req.params.spotId)
+    if (!spot) {
+        let err = new Error()
+        err.status = 404
+        err.message = 'Spot could not be found'
+        next(err)
+    }
+    let date1 = new Date(req.body.startDate)
+    let date2 = new Date (req.body.endDate)
+    let start = date1.getTime()
+    let end = date2.getTime()
+    if(end-start<=0){
+        let err = new Error('endDate cannot be on or before startDate')
+        err.status=400
+        next(err)
+    }
+    let Bookings = await Spot.findByPk(req.params.spotId,
+        {
+            include: {
+                model: Booking,
+                attributes: ['spotId', 'startDate', 'endDate']
+            },
+            attributes: []
+        },
+
+    )
+    for (let booking of Bookings.Bookings){
+        let bookingStart = new Date(booking.startDate)
+        let bookingStartSec = bookingStart.getTime()
+        let bookingEnd = new Date(booking.startDate)
+        let bookingEndSec = bookingEnd.getTime()
+        console.log(bookingStartSec, bookingEndSec)
+        if(start==bookingStartSec||start==bookingEndSec||end==bookingStartSec||end==bookingEndSec){
+            let err = new Error ('Sorry, this spot is already booked for the specified date')
+            err.status =403
+            err.errors={
+                startDate: 'Start date conflicts with existing booking',
+                endDate:'End date conflicts wih existing booking'
+            }
+            next(err)
+        }
+    }
+
+
+
+
+   // console.log(Bookings)
+    let Owner = await spot.getUser()
+    if (Owner.id !== req.user.id){
+        const {startDate,endDate} = req.body
+        let booked = await Booking.create({
+            spotId : req.params.spotId,
+            userId:req.user.id,
+            startDate,
+            endDate
+        })
+       
+       
+        res.json(booked)
+    }
+    else if (Owner.id == req.user.id){
+        res.json({
+           message: 'You already own it!!!!'
+        })
+    }
+})
 
 module.exports = router;
