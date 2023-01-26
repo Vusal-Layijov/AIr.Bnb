@@ -59,7 +59,7 @@ res.json(
     { Bookings }
     )
 })
-
+//router.put('/:bookingId',requireAuth)
 
 
 
