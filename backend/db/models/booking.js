@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
-      unique:true
+     // unique:true
     },
     spotId:{
       type: DataTypes.INTEGER,
