@@ -116,7 +116,32 @@ router.put('/:reviewId', requireAuth, async(req,res,next)=>{
         next(err)
     }
 })
-
+router.delete('/:reviewId', requireAuth, async(req,res,next)=>{
+    console.log(typeof (parseInt(req.params.reviewId)))
+    let id = parseInt(req.params.reviewId)
+    let revieW = await Review.findOne({
+        where: {
+            id: id
+        }
+    }
+    )
+    if (!revieW) {
+        let err = new Error('Review could not be found')
+        err.status = 404,
+            next(err)
+    }
+    let owner = revieW.userId
+    if (owner === req.user.id){
+        await revieW.destroy()
+        return res.json({
+            message: "Successfully deleted"
+        })
+    }
+    else {
+        let err = new Error('Forbidden')
+        next(err)
+    }
+})
 
 
 module.exports = router;
