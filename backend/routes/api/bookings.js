@@ -59,7 +59,35 @@ res.json(
     { Bookings }
     )
 })
-//router.put('/:bookingId',requireAuth)
+router.put('/:bookingId', requireAuth, async (req,res,next)=>{
+    let booking = await Booking.findByPk(req.params.bookingId)
+    if (!booking) {
+        let err = new Error()
+        err.status = 404
+        err.message = 'Booking could not be found'
+        next(err)
+    }
+    let date1 = new Date(req.body.startDate)
+    let date2 = new Date(req.body.endDate)
+    let start = date1.getTime()
+    let end = date2.getTime()
+    if (end - start <= 0) {
+        let err = new Error('endDate cannot be on or before startDate')
+        err.status = 400
+        next(err)
+    }
+    let today = new Date()
+    let todaySec = today.getTime()
+    if(todaySec-start>=0){
+        let err = new Error()
+        err.status = 404
+        err.message = 'Past bookings couldnt be modified'
+        next(err)
+    }
+    
+
+
+})
 
 
 
