@@ -8,8 +8,9 @@ const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
 const { where } = require('sequelize');
 const { requireAuth } = require('../../utils/auth.js');
+const e = require('express');
 const router = express.Router();
-
+const { Op } = require("sequelize");
 const validateLogin = [
     check('credential')
         .exists({ checkFalsy: true })
@@ -21,12 +22,219 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-router.get('/', async(req,res)=>{
+router.get('/', async(req,res,next)=>{
+
+    let { page, size } = req.query;
+    let pagination ={}
+    if(page||size){
+
+    if(isNaN(page) && page){
+        let err = new Error('Page Must be Number')
+        return next(err)
+    }
+    if (isNaN(size) && size) {
+            let err = new Error('Size Must be Number')
+            return next(err)
+    }
+    page = parseInt(page);
+    size = parseInt(size);
+
+    if(page<1){
+        let err = new Error('Page must be greater or equal to 1')
+        return next(err)
+    }
+    if (size < 1) {
+        let err = new Error('Size must be greater or equal to 1')
+        return next(err)
+    }
+        if (!page) page = 1;
+        if (!size) size = 20;
+        if (page >= 1 && size >= 1) {
+            if (size > 20) {
+                size=20
+                pagination.limit = size
+            } 
+            if(size<=20) {
+                pagination.limit = size
+            }
+            if(page > 10){
+                page=10
+                pagination.offset = size * (page - 1)
+            }
+            else if(page<=10){
+                pagination.offset = size * (page - 1)
+            }
+            
+        }
+
+    }
+    if (!page && !size) {
+             page = 1;
+             size = 20;
+             pagination.limit = size
+             pagination.offset = size * (page - 1)
+        } 
+
+        let where = {}
+        if(req.query.minLat && !req.query.maxLat){
+            if (isNaN(req.query.minLat)){
+                let err = new Error('Minimum latitude is invalid')
+                return next(err)
+            }
+            else{
+                where.lat = {
+                    [Op.gte]: req.query.minLat
+                }
+                
+            }
+        }
+    if (req.query.maxLat && !req.query.minLat) {
+        if (isNaN(req.query.maxLat)) {
+            let err = new Error('Maximum latitude is invalid')
+            return next(err)
+        }
+        else {
+            where.lat = {
+                [Op.lte]: req.query.maxLat
+            }
+        }
+    }
+    if (req.query.maxLat && req.query.minLat) {
+        if (isNaN(req.query.maxLat)) {
+            let err = new Error('Maximum latitude is invalid')
+            return next(err)
+        }
+        if (isNaN(req.query.minLat)) {
+            let err = new Error('Minimum latitude is invalid')
+            return next(err)
+        }
+
+
+        else {
+            where.lat = {
+                [Op.between]: [req.query.minLat,req.query.maxLat]
+            }
+        }
+    }
+
+
+
+
+
+    if (req.query.minLng && !req.query.maxLng) {
+        if (isNaN(req.query.minLng)) {
+            let err = new Error('Minimum longtitude is invalid')
+            return next(err)
+        }
+        else {
+            where.lng = {
+                [Op.gte]: req.query.minLng
+            }
+
+        }
+    }
+    if (req.query.maxLng && !req.query.minLng) {
+        if (isNaN(req.query.maxLng)) {
+            let err = new Error('Maximum longtitude is invalid')
+            return next(err)
+        }
+        else {
+            where.lng = {
+                [Op.lte]: req.query.maxLng
+            }
+        }
+    }
+    if (req.query.maxLng && req.query.minLng) {
+        if (isNaN(req.query.maxLng)) {
+            let err = new Error('Maximum longtitude is invalid')
+            return next(err)
+        }
+        if (isNaN(req.query.minLng)) {
+            let err = new Error('Minimum longtitude is invalid')
+            return next(err)
+        }
+        else {
+            where.lng = {
+                [Op.between]: [req.query.minLng,req.query.maxLng]
+            }
+        }
+    }
+
+    if(req.query.minPrice && !req.query.maxPrice){
+        if (isNaN(req.query.minPrice)) {
+            let err = new Error('Minimum price is invalid')
+            return next(err)
+        }
+
+        if (parseInt(req.query.minPrice) < 0) {
+            let err = new Error('Minimum price must be greater or equal to 0')
+            return next(err)
+        }else{
+            where.price = {
+                [Op.gte]: req.query.minPrice
+            }
+        }
+
+    }
+
+    if (req.query.maxPrice && !req.query.minPrice) {
+        if (isNaN(req.query.maxPrice)) {
+            let err = new Error('Maximum price is invalid')
+            return next(err)
+        }
+
+        if (parseInt(req.query.maxPrice) < 0) {
+            let err = new Error('Maximum price must be greater or equal to 0')
+            return next(err)
+        } else {
+            where.price = {
+                [Op.lte]: req.query.maxPrice
+            }
+        }
+
+    }
+    if (req.query.maxPrice && req.query.minPrice) {
+        if (isNaN(req.query.maxPrice)) {
+            let err = new Error('Maximum price is invalid')
+            return next(err)
+        }
+
+        if (parseInt(req.query.maxPrice) < 0) {
+            let err = new Error('Maximum price must be greater or equal to 0')
+            return next(err)
+        } 
+        if (isNaN(req.query.minPrice)) {
+            let err = new Error('Minimum price is invalid')
+            return next(err)
+        }
+
+        if (parseInt(req.query.minPrice) < 0) {
+            let err = new Error('Minimum price must be greater or equal to 0')
+            return next(err)
+        }
+        
+        
+        
+        
+        else {
+            where.price = {
+                [Op.between]: [req.query.minPrice, req.query.maxPrice]
+            }
+        }
+
+    }
+
+
     let spots = await Spot.findAll(
     // {include:Review,
     //                 attributes:[
     //             [sequelize.fn('AVG', sequelize.col('stars')), 'avgRating'],
     //         ]}
+       // 
+        { 
+            where,
+            ...pagination 
+        }
     )
     // let arr=[]
     // for(let spot of spots){
@@ -81,7 +289,9 @@ router.get('/', async(req,res)=>{
   //  console.log(data)
 
     res.json({
-        Spots:result
+        Spots:result,
+        page,
+        size
     })
 } )
 
