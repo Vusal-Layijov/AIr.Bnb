@@ -5,7 +5,7 @@ const { User } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-
+const { requireAuth } = require('../../utils/auth.js');
 const router = express.Router();
 
 const validateLogin = [
@@ -19,7 +19,7 @@ const validateLogin = [
     handleValidationErrors
 ];
 router.get(
-    '/',
+    '/',requireAuth,
     restoreUser,
     (req, res) => {
         const { user } = req;

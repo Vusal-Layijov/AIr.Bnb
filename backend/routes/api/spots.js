@@ -296,7 +296,7 @@ router.get('/', async(req,res,next)=>{
 } )
 
 
-router.get('/current', async(req,res)=>{
+router.get('/current',requireAuth, async(req,res)=>{
    // console.log(req.user.id)
    // let userSpots = await User.findByPk(req.user.id
     //     {
@@ -391,13 +391,19 @@ router.get('/:spotId', async(req,res,next)=>{
     let sendData = spot.toJSON()
     sendData.avgstarrating = avgstarrating[0].dataValues.avgstarrating
     sendData.numReviews=numreview
-    let Owner = await spot.getUser()
+    let spotOwner = await spot.getUser()
     let SpotImages = await SpotImage.findAll({
         where:{spotId:spot.id},
         attributes:['id','url','preview']
     })
+    let Owner = {
+        id:spotOwner.id,
+        firstName:spotOwner.firstName,
+        lastName:spotOwner.lastName
+    }
+    console.log(Owner.id)
     
-    console.log(numreview)
+    //console.log(numreview)
     res.json({...sendData, Owner,SpotImages})
 })
 
@@ -504,7 +510,7 @@ router.post('/:spotId/reviews',requireAuth, async(req,res,next)=>{
     if(reviews.length){
         let err = new Error('User already has a review for this spot')
         err.status=403
-        next(err)
+       return next(err)
     }
    // console.log(reviews)
     let spot = await Spot.findByPk(req.params.spotId)
@@ -513,7 +519,7 @@ router.post('/:spotId/reviews',requireAuth, async(req,res,next)=>{
         let err = new Error()
         err.status = 404
         err.message = 'Spot could not be found'
-        next(err)
+      return  next(err)
     }
  
     const { review, stars } = req.body
@@ -551,7 +557,7 @@ router.get('/:spotId/reviews',async(req,res,next)=>{
         let err = new Error()
         err.status = 404
         err.message = 'Spot could not be found'
-        next(err)
+       return next(err)
     }
 
     let reviews = await Spot.findByPk(req.params.spotId,{
