@@ -61,11 +61,12 @@ res.json(
 })
 router.put('/:bookingId', requireAuth, async (req,res,next)=>{
     let booking = await Booking.findByPk(req.params.bookingId)
+    console.log(booking.spotId)
     if (!booking) {
         let err = new Error()
         err.status = 404
         err.message = 'Booking could not be found'
-        next(err)
+      return  next(err)
     }
     let date1 = new Date(req.body.startDate)
     let date2 = new Date(req.body.endDate)
@@ -74,7 +75,7 @@ router.put('/:bookingId', requireAuth, async (req,res,next)=>{
     if (end - start <= 0) {
         let err = new Error('endDate cannot be on or before startDate')
         err.status = 400
-        next(err)
+       return next(err)
     }
     let today = new Date()
     let todaySec = today.getTime()
@@ -82,11 +83,52 @@ router.put('/:bookingId', requireAuth, async (req,res,next)=>{
         let err = new Error()
         err.status = 404
         err.message = 'Past bookings couldnt be modified'
-        next(err)
+       return next(err)
+    }
+    //console.log(booking)
+    //let spotBookings = await 
+    let Bookings = await Spot.findByPk(booking.spotId,
+        {
+            include: {
+                model: Booking,
+                attributes: ['spotId', 'startDate', 'endDate']
+            },
+            attributes: []
+        },
+
+    )
+
+    for (let booking of Bookings.Bookings) {
+        let bookingStart = new Date(booking.startDate)
+        let bookingStartSec = bookingStart.getTime()
+        let bookingEnd = new Date(booking.startDate)
+        let bookingEndSec = bookingEnd.getTime()
+        console.log(bookingStartSec, bookingEndSec)
+        if (start == bookingStartSec || start == bookingEndSec || end == bookingStartSec || end == bookingEndSec) {
+            let err = new Error('Sorry, this spot is already booked for the specified date')
+            err.status = 403
+            err.errors = {
+                startDate: 'Start date conflicts with existing booking',
+                endDate: 'End date conflicts wih existing booking'
+            }
+         return   next(err)
+        }
+    }
+    if(req.user.id==booking.userId){
+        const{startDate,endDate}= req.body
+        let updated = await booking.update({
+            startDate,endDate
+        })
+        res.json(
+            updated
+        )
+    }
+    else if (req.user.id !== booking.userId){
+        res.json({
+            message:'Forbidden'
+        })
     }
     
-
-
 })
 
 
