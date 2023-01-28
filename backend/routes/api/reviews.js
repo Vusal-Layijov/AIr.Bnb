@@ -143,23 +143,23 @@ router.put('/:reviewId', requireAuth, async(req,res,next)=>{
             next(err)
     }
     let owner = revieW.userId
-    const{review,star}=req.body
+    const{review,stars}=req.body
     if (owner === req.user.id) {
         let updatedReview = await revieW.update({
             spotId:revieW.spotId,
             userId:req.user.id,
             review,
-            star
+            stars:stars
         })
-        let result = await Review.findOne({
-            where: {
-                id: id
-            },
-            attributes: ['id', 'userId', "spotId", "review", "stars", "createdAt", "updatedAt"],
+        // let result = await Review.findOne({
+        //     where: {
+        //         id: id
+        //     },
+        //  //   attributes: ['id', 'userId', "spotId", "review", "stars", "createdAt", "updatedAt"],
             
-        }
-        )
-        return res.json(result)
+        // }
+        // )
+        return res.json(updatedReview)
     }
     else {
         let err = new Error('Forbidden')
