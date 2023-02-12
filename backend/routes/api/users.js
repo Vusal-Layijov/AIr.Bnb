@@ -39,8 +39,9 @@ router.post(
         let result = user.toJSON()
         result.token = token
         console.log(result)
+        let son = {...result}
         return res.json({
-            ...result
+            user:son
         });
     }
 );
