@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
-
 function LoginFormModal() {
     const dispatch = useDispatch();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -23,6 +21,22 @@ function LoginFormModal() {
                 }
             );
     };
+
+    const handleDemoSubmit = (e) => {
+       // e.preventDefault();
+        setErrors([]);
+        return dispatch(sessionActions.login({ credential:"Demo-lition", password:'password' }))
+            .then(closeModal)
+            .catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                }
+            );
+    };
+
+
+
 
     return (
         <>
@@ -51,8 +65,9 @@ function LoginFormModal() {
                         required
                     />
                 </label>
-                <button type="submit">Log In</button>
+                <button type="submit" disabled={(password.length < 6 || credential.length < 4) ? true:false}>Log In</button>
             </form>
+            <button  onClick={()=> handleDemoSubmit()}>Demo User</button>
         </>
     );
 }

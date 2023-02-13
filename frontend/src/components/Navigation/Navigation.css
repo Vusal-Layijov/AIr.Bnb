@@ -1,3 +1,13 @@
 .hidden{
     display: none;
 }
+.headerStyle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.profile{
+    display: flex;
+    align-items: center;
+    padding-top: 33%;
+}
