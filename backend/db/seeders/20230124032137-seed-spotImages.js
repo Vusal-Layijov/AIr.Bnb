@@ -18,19 +18,34 @@ module.exports = {
     */
    options.tableName='SpotImages'
    return queryInterface.bulkInsert(options,[
-    {
-      spotId:1,
-      url:'umage url',
-      preview:true
-    },
+     {
+       spotId: 1,
+       url: 'https://www.stuffmirror.com/wp-content/uploads/2018/12/Sophisticated-Style-Rustic-Mountain-Home-in-Tahoe-1.jpg',
+       preview: true
+     },
      {
        spotId: 2,
-       url: 'image url',
+       url: 'https://joycerey.com/wp-content/uploads/2020/07/blogs-1395.jpg',
        preview: true
      },
      {
        spotId: 3,
-       url: 'image url',
+       url: 'http://www.thewowstyle.com/wp-content/uploads/2015/01/architecture-design-houses.jpg',
+       preview: true
+     },
+     {
+       spotId: 4,
+       url: 'https://2.bp.blogspot.com/-_RbYgKiba6E/T6qXnDNdh1I/AAAAAAAADM0/6jOJ-ecVgXQ/s1600/HDhut.blogspot.com+%252838%2529.jpg',
+       preview: true
+     },
+     {
+       spotId: 5,
+       url: 'https://2.bp.blogspot.com/-iiCHLXdJMgo/T6qVE67340I/AAAAAAAADLM/KUZS5gNiMRE/s1600/HDhut.blogspot.com+%252826%2529.jpeg',
+       preview: true
+     },
+     {
+       spotId: 6,
+       url: 'https://www.keralahouseplanner.com/wp-content/uploads/2012/04/awesome-house-elevation.jpg',
        preview: true
      }
    ])
@@ -46,7 +61,7 @@ module.exports = {
     options.tableName = 'SpotImages';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3] }
+      id: { [Op.in]: [1,2,3,4,5,6] }
     }, {});
   }
 };

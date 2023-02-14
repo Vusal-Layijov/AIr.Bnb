@@ -1,0 +1,48 @@
+import React, {useEffect, useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, Route, useParams } from 'react-router-dom';
+import { setAllSpots } from '../../store/spots';
+import './index.css'
+
+export default function AllSpotsDetails() {
+    const dispatch = useDispatch()
+    const spots = useSelector(state => state.spots.Spots)
+    //console.log(spots[0].previewImage)
+    useEffect(() =>{
+        dispatch(setAllSpots())
+    },[dispatch])
+    if(!spots) {
+        return null
+    }
+    //style={{backgroundImage: `url('${spots[0].previewImage}')`}}
+  return (
+   
+    
+    <div className ='forfirst'>
+       {spots.map((spot) =>{
+         return (
+            <nav className='forNewDiv'>
+              <NavLink className='forNav' key = {spot.id} to={`/pokemon/${spot.id}`}>
+                <div >
+                    <div className='spotClass' >
+                        <img src={spot.previewImage} className='forImage'></img>
+                    </div>
+                    <div className='forInside'>
+                        <div>{spot.city}, {spot.state}</div>
+                        <div>⭐️{spot.avgRating}</div>
+                    </div>
+                    <div>
+                        {spot.price}
+                    </div>
+                </div>
+              </NavLink>
+            </nav>
+          )
+        })}
+    </div>       
+      
+    
+    
+    
+  )
+}

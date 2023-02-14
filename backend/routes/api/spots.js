@@ -287,7 +287,7 @@ router.get('/', async(req,res,next)=>{
 
 
   //  console.log(data)
-
+    
     res.json({
         Spots:result,
         page,
