@@ -1,5 +1,6 @@
 const SET_SPOTS = 'spots/SET_SPOTS'
 
+
 const setSpots = (spots) =>{
     return{
         type:SET_SPOTS,
@@ -7,12 +8,17 @@ const setSpots = (spots) =>{
     }
 }
 
+
+
 export const setAllSpots = () => async dispatch =>{
     const response = await fetch('/api/spots')
     const data = await response.json()
     dispatch(setSpots(data))
     return response
 }
+
+
+
 const initialState = {}
 const spotsReducer = (state = initialState, action)=>{
 let newState;

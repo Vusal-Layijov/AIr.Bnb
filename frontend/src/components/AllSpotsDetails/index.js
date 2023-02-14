@@ -21,8 +21,8 @@ export default function AllSpotsDetails() {
     <div className ='forfirst'>
        {spots.map((spot) =>{
          return (
-            <nav className='forNewDiv'>
-              <NavLink className='forNav' key = {spot.id} to={`/pokemon/${spot.id}`}>
+           <nav key={spot.id} className='forNewDiv'>
+              <NavLink className='forNav'  to={`/spots/${spot.id}`}>
                 <div >
                     <div className='spotClass' >
                         <img src={spot.previewImage} className='forImage'></img>
