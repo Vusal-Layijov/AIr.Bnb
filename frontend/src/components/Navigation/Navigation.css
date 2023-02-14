@@ -5,6 +5,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 20px;
+    height: 10vh;
+    
 }
 .profile{
     display: flex;

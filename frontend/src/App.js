@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-
+import AllSpotsDetails from "./components/AllSpotsDetails";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -13,10 +13,11 @@ function App() {
   useEffect(() =>{
     setIsLoaded(true)
   }, [])
-
+//<Navigation isLoaded={isLoaded} />
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      
+      <AllSpotsDetails />
       {isLoaded && (
         <Switch>
         </Switch>
