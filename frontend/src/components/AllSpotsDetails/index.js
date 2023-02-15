@@ -6,7 +6,7 @@ import './index.css'
 
 export default function AllSpotsDetails() {
     const dispatch = useDispatch()
-    const spots = useSelector(state => state.spots.Spots)
+    const spots = useSelector(state =>Object.values(state.spots))
     //console.log(spots[0].previewImage)
     useEffect(() =>{
         dispatch(setAllSpots())

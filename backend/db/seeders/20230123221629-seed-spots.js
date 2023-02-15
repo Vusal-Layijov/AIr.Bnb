@@ -30,7 +30,7 @@ module.exports = {
         lng: 12.2134567,
         name: 'VIP Resort',
         description: 'Place where to chill',
-        price: '$123.98 per night',
+        price: 123.98
       },
       {
         ownerId: 1,
@@ -42,7 +42,7 @@ module.exports = {
         lng: 32.2134567,
         name: 'VIP Address',
         description: 'Place where to relax',
-        price: '$100.00 per night',
+        price: 100.00 ,
       },
       {
         ownerId: 2,
@@ -54,7 +54,7 @@ module.exports = {
         lng: 72.2134567,
         name: 'VIP Woda',
         description: 'Place where to swim',
-        price: '$187.45 per night',
+        price: 187.45 ,
       },
       {
         ownerId: 3,
@@ -66,7 +66,7 @@ module.exports = {
         lng: 82.2134567,
         name: 'Dag Resort',
         description: 'Mountain side. Lake front great home ',
-        price: '$149 per night',
+        price: 149 ,
       },
       {
         ownerId: 2,
@@ -78,7 +78,7 @@ module.exports = {
         lng: 92.2134567,
         name: 'King of Jungle',
         description: 'Your dream home in mountain',
-        price: '$129.50 per night',
+        price: 129.50 ,
       },
       {
         ownerId: 1,
@@ -90,7 +90,7 @@ module.exports = {
         lng: 42.2134567,
         name: 'Sarah',
         description: 'Best of the best.',
-        price: '$109.50 per night',
+        price: 109.50 ,
       }
 
     ],{})

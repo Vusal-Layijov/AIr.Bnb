@@ -21,14 +21,15 @@ function App() {
       
       
      
-     
+      < Navigation isLoaded={isLoaded} />
         <Switch>
+         
           <Route exact path={'/'}>
-          < Navigation isLoaded={isLoaded} />
+        
           <AllSpotsDetails />
           </Route>
           <Route path={'/spots/:spotId'}>
-            < Navigation isLoaded={isLoaded} />
+      
             <SetOneSPot />
           </Route>
         </Switch>
