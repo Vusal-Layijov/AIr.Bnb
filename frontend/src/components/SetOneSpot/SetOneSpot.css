@@ -1,0 +1,18 @@
+.underHost {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.forInside {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+.upperReserveButton{
+    display: flex;
+       
+    flex-direction: column;
+    border: 2px solid black;
+}
