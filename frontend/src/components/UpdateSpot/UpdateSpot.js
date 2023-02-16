@@ -12,7 +12,7 @@ export default function UpdateSpot() {
     }, [dispatch])
   
     const history = useHistory();
-    const [country, setCountry] = useState(spot.Country)
+    const [country, setCountry] = useState(spot.country)
     const [address, setAddress] = useState(spot.address)
     const [city, setCity] = useState(spot.city)
     const [state, setState] = useState(spot.state)
