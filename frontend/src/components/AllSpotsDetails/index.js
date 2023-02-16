@@ -29,7 +29,7 @@ export default function AllSpotsDetails() {
                     </div>
                     <div className='forInside'>
                         <div>{spot.city}, {spot.state}</div>
-                   <div>{spot.avgRating ? `⭐️ ${spot.avgRating.toFixed(1) }`  : 'New'}</div>
+                   <div>{spot.avgRating ? `⭐️ ${spot.avgRating }`  : 'New'}</div>
                     </div>
                     <div>
                         {spot.price}
