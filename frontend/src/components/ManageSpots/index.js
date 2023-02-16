@@ -5,6 +5,9 @@ import { NavLink, Route, useParams } from 'react-router-dom';
 import { setCurrentUserSpotsFunc } from '../../store/spots';
 import './index.css'
 import { removeSpotFunc } from '../../store/spots';
+import OpenModalButton from '../OpenModalButton';
+import DeleteSpot from './DeleteSpot';
+
 export default function ManageSpots() {
     const dispatch = useDispatch()
     const spots = useSelector(state => Object.values(state.spots.allSpots))
@@ -14,7 +17,8 @@ export default function ManageSpots() {
     if (!spots) {
         return null
     }
-    console.log('current user spots', spots)
+   // <button onClick={() => dispatch(removeSpotFunc(spot.id))} >Delete</button>
+   // console.log('current user spots', spots)
   return (
     <>
       <h1>Manage Spots</h1>
@@ -35,7 +39,7 @@ export default function ManageSpots() {
                               <div className='forInside'>
                                   <div>{spot.price}</div>
                                   <NavLink to={`/spots/${spot.id}/edit`}><button>Update</button></NavLink> 
-                                  <button onClick={() => dispatch(removeSpotFunc(spot.id))} >Delete</button>
+                                  <div><OpenModalButton buttonText="Delete" modalComponent={<DeleteSpot spotId={spot.id} />}/></div>
                               </div>
                           </div>
                       </div>
