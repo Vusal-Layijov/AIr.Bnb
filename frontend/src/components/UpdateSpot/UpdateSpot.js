@@ -2,17 +2,17 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { updateSpotFunc } from '../../store/spots';
-import { setAllSpots } from '../../store/spots';
+import { setAllSpots, setCurrentUserSpotsFunc } from '../../store/spots';
 export default function UpdateSpot() {
     const {spotId} = useParams()
     const dispatch = useDispatch();
     const spot = useSelector(state => state.spots.allSpots[spotId])
-    // useEffect(() => {
-    //     dispatch(setAllSpots())
-    // }, [spot])
+    useEffect(() => {
+        dispatch(setCurrentUserSpotsFunc())
+    }, [dispatch])
   
     const history = useHistory();
-    const [country, setCountry] = useState(spot.country)
+    const [country, setCountry] = useState(spot.Country)
     const [address, setAddress] = useState(spot.address)
     const [city, setCity] = useState(spot.city)
     const [state, setState] = useState(spot.state)
@@ -20,7 +20,13 @@ export default function UpdateSpot() {
     const [description, setDescription] = useState(spot.description)
     const [price, setPrice] = useState(spot.price)
     const [image, setImage] = useState(spot.previewImage)
-
+    // spot ? setCountry(spot.country) : setCountry('')
+    // spot ? setAddress(spot.address) : setAddress('')
+    // spot ? setCity(spot.city) : setCity('')
+    // spot ? setState(spot.state) : setState('')
+    // spot ? setTitle(spot.name) : setTitle('')
+    // spot ? setDescription(spot.description) : setDescription('')
+    // spot ? setPrice(spot.price) : setPrice('')
     const updateCountry = (e) => setCountry(e.target.value);
     const updateAddress = (e) => setAddress(e.target.value);
     const updateCity = (e) => setCity(e.target.value);
@@ -30,9 +36,9 @@ export default function UpdateSpot() {
     const updatePrice = (e) => setPrice(e.target.value);
     const updateImage = (e) => setImage(e.target.value)
 
-    // if (!spot) {
-    //     return null
-    // }
+    if (!spot) {
+        return null
+    }
 
     console.log('updaespotis', spot)
     const handleSubmit = async (e) => {
