@@ -5,6 +5,8 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import AllSpotsDetails from "./components/AllSpotsDetails";
 import SetOneSPot from "./components/SetOneSpot/setOneSpot";
+import CreateNewSpot from "./components/CreateNewSpot/CreateNewSpot";
+import ManageSpots from "./components/ManageSpots";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,6 +18,12 @@ function App() {
   }, [])
     // < Navigation isLoaded = { isLoaded } />
     //   <AllSpotsDetails />
+
+
+ 
+    // <Route path={'/spots/new'}>
+    //   <CreateNewSpot />
+    // </Route>
   return (
     <>
       
@@ -23,15 +31,19 @@ function App() {
      
       < Navigation isLoaded={isLoaded} />
         <Switch>
-         
           <Route exact path={'/'}>
-        
-          <AllSpotsDetails />
+            <AllSpotsDetails />
           </Route>
-          <Route path={'/spots/:spotId'}>
-      
-            <SetOneSPot />
-          </Route>
+        <Route exact path={'/spots/new'}>
+          <CreateNewSpot />
+        </Route>
+        <Route path={'/spots/current'}>
+          <ManageSpots />
+        </Route>
+        < Route exact path={'/spots/:spotId'} >
+          <SetOneSPot />
+        </Route >
+       
         </Switch>
       
     </>
