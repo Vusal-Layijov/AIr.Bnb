@@ -5,7 +5,7 @@ import './Navigation.css'
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
-
+import { NavLink } from "react-router-dom";
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
@@ -54,12 +54,14 @@ function ProfileButton({ user }) {
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>
+                        <NavLink to={'/spots/current'} > <button >Manage Spots</button></NavLink> 
                     </>
                     ) : (
                         <>
                             <li>{user.username}</li>
                             <li>Hello {user.firstName} {user.lastName}</li>
                             <li>{user.email}</li>
+                            <NavLink to={'/spots/current'} > <button >Manage Spots</button></NavLink> 
                             <li>
                                 <button onClick={logout}>Log Out</button>
                             </li>
