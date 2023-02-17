@@ -2,24 +2,60 @@ import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { updateSpotFunc } from '../../store/spots';
-import { setAllSpots, setCurrentUserSpotsFunc } from '../../store/spots';
+import { setAllSpots, setCurrentUserSpotsFunc, setOneSpotDetails } from '../../store/spots';
 export default function UpdateSpot() {
     const {spotId} = useParams()
     const dispatch = useDispatch();
-    const spot = useSelector(state => state.spots.allSpots[spotId])
-    useEffect(() => {
-        dispatch(setCurrentUserSpotsFunc())
-    }, [dispatch])
-  
     const history = useHistory();
-    const [country, setCountry] = useState(spot.country)
-    const [address, setAddress] = useState(spot.address)
-    const [city, setCity] = useState(spot.city)
-    const [state, setState] = useState(spot.state)
-    const [title, setTitle] = useState(spot.name)
-    const [description, setDescription] = useState(spot.description)
-    const [price, setPrice] = useState(spot.price)
-    const [image, setImage] = useState(spot.previewImage)
+    const spot = useSelector(state => state.spots.allSpots[spotId])
+
+    let user;
+    user = useSelector((state) => state.session.user);
+     if (!user) history.push(`/`);
+
+
+    let obj = {}
+   
+    obj = useSelector((state) => {
+        return state.spots.singleSpot;
+    });
+
+
+    useEffect(() => {
+        const stateAdd = async () => {
+            let spotInfo = await dispatch(setOneSpotDetails(spotId));
+
+            setCountry(spotInfo.country)
+            setAddress(spotInfo.address)
+            setCity(spotInfo.city)
+            setState(spotInfo.state)
+            // setLatitude(spotInfo.lat);
+            // setLongitude(spotInfo.lng);
+            setDescription(spotInfo.description)
+            setTitle(spotInfo.name)
+            setPrice(spotInfo.price)
+        }
+        stateAdd()
+    }, [dispatch]);
+
+    // useEffect(() => {
+    //     dispatch(setCurrentUserSpotsFunc())
+    // }, [dispatch])
+      let isOwner = true
+      if(Object.keys(obj).length >0 && obj.ownerId !== user.id) isOwner = false
+      if(isOwner === false) history.push('/')
+
+
+
+   
+    const [country, setCountry] = useState('')
+    const [address, setAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [price, setPrice] = useState('')
+    const [image, setImage] = useState('')
     // spot ? setCountry(spot.country) : setCountry('')
     // spot ? setAddress(spot.address) : setAddress('')
     // spot ? setCity(spot.city) : setCity('')
@@ -36,9 +72,12 @@ export default function UpdateSpot() {
     const updatePrice = (e) => setPrice(e.target.value);
     const updateImage = (e) => setImage(e.target.value)
 
+    if (!Object.entries(obj).length > 0){
+        return null
+    }
+    
 
-
-    console.log('updaespotis', spot)
+  
     const handleSubmit = async (e) => {
         e.preventDefault()
         const spot = {
@@ -56,7 +95,6 @@ export default function UpdateSpot() {
         
         if (updatedSpot) {
             history.push(`/spots/${updatedSpot.id}`);
-
         }
         // setCountry('')
         // setAddress('')
