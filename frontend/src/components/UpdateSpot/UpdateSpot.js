@@ -36,9 +36,7 @@ export default function UpdateSpot() {
     const updatePrice = (e) => setPrice(e.target.value);
     const updateImage = (e) => setImage(e.target.value)
 
-    if (!spot) {
-        return null
-    }
+
 
     console.log('updaespotis', spot)
     const handleSubmit = async (e) => {

@@ -34,7 +34,7 @@ export default function ManageSpots() {
                               </div>
                               <div className='forInside'>
                                   <div>{spot.city}, {spot.state}</div>
-                                  <div>⭐️{spot.avgRating}</div>
+                                  <div>⭐️{spot.avgRating ? parseFloat(spot.avgRating).toFixed(1): 'New'}</div>
                               </div>
                               <div className='forInside'>
                                   <div>{spot.price}</div>
