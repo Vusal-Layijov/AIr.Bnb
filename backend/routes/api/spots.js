@@ -267,8 +267,7 @@ router.get('/', async(req,res,next)=>{
         //console.log(data[0].dataValues.avgRating)
         //let spott = await Spot.findByPk(spot.id)
        let resData = spot.toJSON()
-        let forGo = Number(data[0].dataValues.avgRating)
-      resData.avgRating = forGo.toFixed(1)
+      resData.avgRating = data[0].dataValues.avgRating
         let previewImage = await Spot.findByPk(spot.id,{
             include:{
                 model:SpotImage,
