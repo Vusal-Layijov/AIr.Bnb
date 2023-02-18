@@ -5,12 +5,37 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+   
+    height: 10vh;
+    border-bottom-style:  solid;
+        border-width: 1px 0;
+        border-color: #000;
+    
+}
+.navStyle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin: 20px;
     height: 10vh;
-    
+
 }
 .profile{
     display: flex;
     align-items: center;
     padding-top: 33%;
+   
+ 
+   
 }
+.logOut{
+    width: 60px;
+    border-radius: 50%;
+    border: 5px solid black;
+    color: white;
+}
+#box{
+    position: relative;
+    height: 1vh;
+}
+.ulClassName{}

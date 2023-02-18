@@ -41,52 +41,51 @@ function ProfileButton({ user }) {
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 // <i className="fas fa-user-circle" />
     return (
-        <>
+        <div id="box">
             <div className="profile">
                 <button onClick={openMenu}>
                     <i className="fas fa-user-circle" />
                 </button>
             </div>
-            <ul className={ulClassName} ref={ulRef}>
+            <div className={ulClassName} ref={ulRef}>
                 {user ? ( user.username === 'Demo-lition' ? (
                     <>
                         <li>Demo User</li>
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>
-                        <NavLink to={'/spots/current'} > <button >Manage Spots</button></NavLink> 
+                        <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > <h4>Manage Spots</h4></NavLink> 
                     </>
                     ) : (
                         <>
-                            <li>{user.username}</li>
-                            <li>Hello {user.firstName} {user.lastName}</li>
-                            <li>{user.email}</li>
-                            <NavLink to={'/spots/current'} > <button >Manage Spots</button></NavLink> 
-                            <li>
-                                <button onClick={logout}>Log Out</button>
-                            </li>
+                            <div>  <p4>{user.username}</p4></div>
+                            <div><p4>Hello {user.firstName} {user.lastName}</p4></div> 
+                            <div>    <p4>{user.email}</p4> </div> 
+                            <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} >  <h4>Manage Spots</h4></NavLink> 
+                            <button  onClick={logout}>Log Out</button>
+                            
                         </>
                     )
                 ) : (
                     <>
-                        <li>
+                        <div>
                             <OpenModalButton
                                 buttonText="Log In"
                                 onButtonClick={closeMenu}
                                 modalComponent={<LoginFormModal />}
                             />
-                        </li>
-                        <li>
+                        </div>
+                        <div>
                             <OpenModalButton
                                 buttonText="Sign Up"
                                 onButtonClick={closeMenu}
                                 modalComponent={<SignupFormModal />}
                             />
-                        </li>
+                        </div>
                     </>
                 )}
-            </ul>
-        </>
+            </div>
+        </div>
     );
 }
 
