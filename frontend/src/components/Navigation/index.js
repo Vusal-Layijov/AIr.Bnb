@@ -14,12 +14,14 @@ function Navigation({ isLoaded }) {
     <>    
         <div className='headerStyle'>
             <div>
-                <NavLink exact to="/"><Image /></NavLink>
+                <NavLink style={{marginLeft:'50px', }} exact to="/"><Image /></NavLink>
             </div>
             {isLoaded && (
-                <div className='headerStyle'>
-                    <NavLink to={'/spots/new'} > <button >Create a new Spot</button></NavLink> 
-                    <ProfileButton user={sessionUser} />
+                <div className='navStyle'>
+                        <div> {sessionUser && <NavLink to={'/spots/new'} style={{ textDecoration: 'none', }} ><h4 style={{ fontStyle: 'italic', marginTop:'5px', marginRight:'10px' }}>Create a New Spot</h4> </NavLink> 
+
+                   }</div>
+                  <div>  <ProfileButton user={sessionUser} /> </div>
                 </div>
             )}
            

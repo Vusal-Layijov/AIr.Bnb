@@ -57,24 +57,28 @@ function SetOneSPot () {
     return (
     <>  
  
-      <div>
+      <div className='mainDiv'>
        <h1>{singleSpot.name}</h1>
        <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-        <img src={singleSpot.SpotImages[0].url} style={{width:'800px'}} ></img>
+        <img src={singleSpot.SpotImages[0].url} style={{width:'1050px', height:'500px'}} ></img>
         <div>Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName} </div>
         <div className='underHost'>
           <div>{singleSpot.description}</div>
           <div className='upperReserveButton'>
             <div className='underHost'>
-              <div>{`$${singleSpot.price} / night`}</div>
+              
+                <div>
+                {`＄${singleSpot.price}  night`}
+                </div>
                 <div>   {!singleSpot.numReviews
-                  ? "New"
-                  : `${parseFloat(singleSpot.avgstarrating).toFixed(1)} rating `}{" "}
+                  ? "★  New"
+                  : `★ ${parseFloat(singleSpot.avgstarrating).toFixed(1)}`}{" "}
                   • {singleSpot.numReviews} review
-                  {singleSpot.numReviews > 0 ? "s" : null}</div>
+                  {singleSpot.numReviews > 1 ? "s" : null}
+                </div>
             </div>
-            <div>
-              <button onClick={() =>alert('This future is coming')}>Reserve</button>
+            <div className='forReserve'>
+              <button className='forButton' onClick={() =>alert('This future is coming')}>Reserve</button>
             </div>
           </div>
         </div>
@@ -82,11 +86,12 @@ function SetOneSPot () {
           <div >
             <h2 >
               <span>
-                <i className="fa-regular fa-star"></i>
+                ★ 
                 {!singleSpot.numReviews
                   ? "New"
                   : `${parseFloat(singleSpot.avgstarrating).toFixed(1) } rating • `}
-                {!singleSpot.numReviews ? " " : `${singleSpot.numReviews} reviews`}
+                {singleSpot.numReviews} review
+                {singleSpot.numReviews > 1 ? "s" : ''}
               </span>
             </h2>
 

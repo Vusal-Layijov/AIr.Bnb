@@ -3,6 +3,8 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+    gap: 10px;
+  
 }
 
 .forInside {
@@ -15,4 +17,21 @@
        
     flex-direction: column;
     border: 2px solid black;
+    border-radius: 10px;
+}
+.mainDiv{
+    margin-left: 100px;
+    margin-right: 300px;
+}
+.forReserve{
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+}
+.forButton{
+    width: 180px;
+    background-color: red;
+    border-radius: 2px;
+    color: aliceblue;
+    margin: 5px;
 }
