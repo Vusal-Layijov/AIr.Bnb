@@ -60,7 +60,7 @@ function SetOneSPot () {
       <div className='mainDiv'>
        <h1>{singleSpot.name}</h1>
        <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-          <img src={singleSpot.SpotImages[0].url} style={{ width: '1200px', height: '550px', marginLeft :'10px'}} ></img>
+          <img src={singleSpot.SpotImages[0].url} style={{ width: '1210px', height: '550px', marginLeft :'2px'}} ></img>
         <div>Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName} </div>
         <div className='underHost'>
           <div>{singleSpot.description}</div>
@@ -72,7 +72,7 @@ function SetOneSPot () {
                 </div>
                 <div>   {!singleSpot.numReviews
                   ? "★  New"
-                  : `★ ${parseFloat(singleSpot.avgstarrating).toFixed(1)}•`} {" "}
+                  : `★ ${parseFloat(singleSpot.avgstarrating).toFixed(1)} •`} {" "}
                   {singleSpot.numReviews == 0 ? '' :
                    `${singleSpot.numReviews}  Review`}
                   {singleSpot.numReviews > 1 ? "s" : null}
@@ -123,25 +123,3 @@ function SetOneSPot () {
 }
 
 export default SetOneSPot;
-
-{/* <div>
-  <h1>{singleSpot.name}</h1>
-  <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-  <img src={singleSpot.SpotImages[0].url} style={{ width: '800px' }} ></img>
-  <div>Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName} </div>
-  <div className='underHost'>
-    <div>{singleSpot.description}</div>
-    <div className='upperReserveButton'>
-      <div className='underHost'>
-        <div>{singleSpot.price}</div>
-        <div>{singleSpot.avgstarrating}⭐️ . {singleSpot.numReviews} reviews</div>
-      </div>
-      <div>
-        <button onClick={() => alert('This future is coming')}>Reserve</button>
-      </div>
-    </div>
-  </div>
-  <br></br>
-  <div>{singleSpot.avgstarrating}⭐️ . {singleSpot.numReviews} reviews</div>
-  <SpotReviews reviews={reviews} spotId={spotId} />
-</div> */}

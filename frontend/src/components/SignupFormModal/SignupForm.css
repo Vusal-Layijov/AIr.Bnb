@@ -5,7 +5,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
-    height: 350px;
+    height: 380px;
     background-color: rgb(211, 203, 203);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -44,7 +44,6 @@
 .forSubmit {
     background-color: #ffffff;
     border: 1px solid #222222;
-    border-radius: 8px;
     box-sizing: border-box;
     color: #222222;
     cursor: pointer;
@@ -76,7 +75,7 @@
 }
 
 .forSubmit:active {
-    background-color: #f7f7f7;
+    background-color: red;
     border-color: #635c5c;
     transform: scale(0.96);
 }
@@ -86,6 +85,7 @@
     color: #787474;
     cursor: not-allowed;
     opacity: 1;
+    background-color: red;
 }
 
 .demoSubmit {

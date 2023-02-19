@@ -6,7 +6,9 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 function ProfileButton({ user }) {
+    const history = useHistory()
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
@@ -36,6 +38,7 @@ function ProfileButton({ user }) {
         e.preventDefault();
         dispatch(sessionActions.logout());
         closeMenu();
+        history.push('/')
     };
 
     const ulClassName = "profile-dropdown sonMenu" + (showMenu ? "" : " hidden");
@@ -48,7 +51,7 @@ function ProfileButton({ user }) {
                     <i className="fas fa-user-circle" />
                 </button>
            
-            <div style={{width:'198px', border:'1px solid'}} className={ulClassName} ref={ulRef}>
+            <div style={{width:'195px', border:'1px solid'}} className={ulClassName} ref={ulRef}>
                 {user ? (user.username === 'Demo-lition' ? (
                     <>
                         <p>Demo User</p>
@@ -60,7 +63,7 @@ function ProfileButton({ user }) {
                 ) : (
                     <>
                         
-                        <p>Hello, {user.firstName} {user.lastName}</p>
+                        <p>Hello, {user.firstName}</p>
                         <p>{user.email}</p>
                         <p className="forManage"><NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > Manage Spots</NavLink></p>
                         <button className="logOutBut" onClick={logout}>Log Out</button>

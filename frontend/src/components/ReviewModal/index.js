@@ -36,7 +36,7 @@ export default function ReviewModal({spotId}) {
     };
 
   return (
-      <div className="sonmod">
+      <div className="sonmoda">
           <h1>How was your stay?</h1>
           <form onSubmit={handleSubmit}>
               <label for="review">
@@ -51,6 +51,7 @@ export default function ReviewModal({spotId}) {
                       {review}
                   </textarea>
               </label>
+              <div className='forTest'>
               <div class="rate">
                   <input
                       type="radio"
@@ -107,8 +108,10 @@ export default function ReviewModal({spotId}) {
                   <label for="star1" title="text">
                       1 star
                   </label>
-                  <p>STARS</p>
+                
               </div>
+             <div style={{marginTop:'18px'}}>Stars</div>
+             </div>
               <button
                   className="submit-button"
                   type="submit"
