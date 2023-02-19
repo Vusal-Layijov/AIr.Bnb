@@ -38,7 +38,7 @@ function ProfileButton({ user }) {
         closeMenu();
     };
 
-    const ulClassName = "profile-dropdown float-menu" + (showMenu ? "" : " hidden");
+    const ulClassName = "profile-dropdown sonMenu" + (showMenu ? "" : " hidden");
     // <i className="fas fa-user-circle" />
     return (
         <div id="box">
@@ -48,22 +48,22 @@ function ProfileButton({ user }) {
                     <i className="fas fa-user-circle" />
                 </button>
            
-            <div className={ulClassName} ref={ulRef}>
+            <div style={{width:'198px', border:'1px solid'}} className={ulClassName} ref={ulRef}>
                 {user ? (user.username === 'Demo-lition' ? (
                     <>
-                        <li>Demo User</li>
-                        <li>
-                            <button onClick={logout}>Log Out</button>
-                        </li>
-                        <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > <h4>Manage Spots</h4></NavLink>
+                        <p>Demo User</p>
+                        <p className="forManage"> <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > Manage Spots</NavLink></p>
+                        <button className="logOutBut" onClick={logout}>Log Out</button>
+                       
+                    
                     </>
                 ) : (
                     <>
-                        <div>  <h4>{user.username}</h4></div>
-                        <div><h4>Hello {user.firstName} {user.lastName}</h4></div>
-                        <div>    <h4>{user.email}</h4> </div>
-                        <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} >  <h4>Manage Spots</h4></NavLink>
-                        <button onClick={logout}>Log Out</button>
+                        
+                        <p>Hello, {user.firstName} {user.lastName}</p>
+                        <p>{user.email}</p>
+                        <p className="forManage"><NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > Manage Spots</NavLink></p>
+                        <button className="logOutBut" onClick={logout}>Log Out</button>
 
                     </>
                 )

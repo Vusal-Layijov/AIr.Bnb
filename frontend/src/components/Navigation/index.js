@@ -13,7 +13,7 @@ function Navigation({ isLoaded }) {
     return (
         
             <div className='headerStyle'>
-                <div>
+                <div style={{marginLeft:'50px'}}>
                     <NavLink style={{ marginLeft: '50px', }} exact to="/"><Image /></NavLink>
                 </div>
                 {isLoaded && (
