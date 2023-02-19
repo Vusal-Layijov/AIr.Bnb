@@ -18,16 +18,16 @@ export default function AllSpotsDetails() {
   return (
    
     
-    <div className ='forfirst'>
+    <div className ='forFirst'>
        {spots.map((spot) =>{
          return (
-           <nav key={spot.id} className='forNewDiv'>
-             <NavLink style={{ textDecoration: 'none' }} className='forNav'  to={`/spots/${spot.id}`}>
+           <nav key={spot.id} className='forNew'>
+             <NavLink style={{ textDecoration: 'none' }} className='fornav'  to={`/spots/${spot.id}`}>
                 <div >
-                    <div className='spotClass' >
-                        <img src={spot.previewImage} className='forImage'></img>
+                    <div className='spotclass' >
+                        <img src={spot.previewImage} className='forimage'></img>
                     </div>
-                    <div className='forInside'>
+                    <div className='forinside'>
                         <div>{spot.city}, {spot.state}</div>
                    <div>{spot.avgRating ? `⭐️ ${parseFloat(spot.avgRating).toFixed(1)}` : '⭐️ New'}</div>
                     </div>
