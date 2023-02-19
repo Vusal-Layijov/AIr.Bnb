@@ -1,21 +1,21 @@
 
 
-.sonmod h1 {
+.sonmoda h1 {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.sonmod form {
+.sonmoda form {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.sonmod form input[type="text"],
-.sonmod form input[type="email"],
-.sonmod form input[type="password"] {
+.sonmoda form input[type="text"],
+.sonmoda form input[type="email"],
+.sonmoda form input[type="password"] {
     width: 100%;
     padding: 5px;
     margin-bottom: 10px;
@@ -24,13 +24,13 @@
     border-bottom: 1px solid lightgray;
 }
 
-.sonmod {
+.sonmoda {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
-    height: 200px;
+    width: 400px;
+    height: 350px;
     background-color: rgb(207, 202, 202);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -43,7 +43,7 @@
 .submit-button {
     background-color: #ffffff;
     border: 1px solid #222222;
-    border-radius: 8px;
+   
     box-sizing: border-box;
     color: #222222;
     cursor: pointer;
@@ -64,12 +64,13 @@
         transform 0.1s;
     user-select: none;
     -webkit-user-select: none;
-    width: auto;
+    width: 400px;
 }
 
 .submit-button:hover {
-    box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+    box-shadow: #544e4e 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
     transition: box-shadow 0.2s;
+    background-color: red;
 }
 
 .submit-button:active {
@@ -131,5 +132,9 @@
 .rate>label:hover~input:checked~label {
     color: #c59b08;
 }
-
+.forTest{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
