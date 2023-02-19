@@ -38,34 +38,35 @@ function ProfileButton({ user }) {
         closeMenu();
     };
 
-    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-// <i className="fas fa-user-circle" />
+    const ulClassName = "profile-dropdown float-menu" + (showMenu ? "" : " hidden");
+    // <i className="fas fa-user-circle" />
     return (
         <div id="box">
-            <div className="profile">
-                <button onClick={openMenu}>
+            
+                <button className="profileBut" onClick={openMenu}>
+                    <i className="fa-solid fa-bars" />{" "}
                     <i className="fas fa-user-circle" />
                 </button>
-            </div>
+           
             <div className={ulClassName} ref={ulRef}>
-                {user ? ( user.username === 'Demo-lition' ? (
+                {user ? (user.username === 'Demo-lition' ? (
                     <>
                         <li>Demo User</li>
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>
-                        <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > <h4>Manage Spots</h4></NavLink> 
+                        <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > <h4>Manage Spots</h4></NavLink>
                     </>
-                    ) : (
-                        <>
-                            <div>  <h4>{user.username}</h4></div>
-                            <div><h4>Hello {user.firstName} {user.lastName}</h4></div> 
-                            <div>    <h4>{user.email}</h4> </div> 
-                            <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} >  <h4>Manage Spots</h4></NavLink> 
-                            <button  onClick={logout}>Log Out</button>
-                            
-                        </>
-                    )
+                ) : (
+                    <>
+                        <div>  <h4>{user.username}</h4></div>
+                        <div><h4>Hello {user.firstName} {user.lastName}</h4></div>
+                        <div>    <h4>{user.email}</h4> </div>
+                        <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} >  <h4>Manage Spots</h4></NavLink>
+                        <button onClick={logout}>Log Out</button>
+
+                    </>
+                )
                 ) : (
                     <>
                         <div>
