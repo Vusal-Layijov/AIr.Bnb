@@ -1,41 +1,68 @@
-.hidden{
+.hidden {
     display: none;
 }
+
 .headerStyle {
-    display: flex;
-    flex-direction: row;
+display: flex;
+    font-family: Helvetica, sans-serif;
     justify-content: space-between;
-   
-    height: 10vh;
-    border-bottom-style:  solid;
-        border-width: 1px 0;
-        border-color: #000;
-    
-}
-.navStyle {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 20px;
-    height: 10vh;
+    border-bottom: solid;
+    border-color: lightgray;
+    padding: 10px;
 
 }
-.profile{
+
+.navStyle {
+display: flex;
+    align-items: center;
+    margin-left: -20px;
+    gap: 15px;
+
+}
+
+.profile {
     display: flex;
     align-items: center;
     padding-top: 33%;
-   
- 
-   
+
+
+
 }
-.logOut{
+
+.logOut {
     width: 60px;
     border-radius: 50%;
     border: 5px solid black;
     color: white;
 }
-#box{
+
+#box {
     position: relative;
     height: 1vh;
 }
-.ulClassName{}
+.forProfile{
+    background-color: white;
+        height: 40px;
+        width: 80px;
+        border-radius: 20px;
+        margin-right: 20px;
+}
+.float-menu {
+    position: absolute;
+    background-color: white;
+    /* border: solid black; */
+    margin: 5px 0px 0px -80px;
+    padding: 20px;
+    border-radius: 10px;
+    width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    justify-content: center;
+}
+.profileBut{
+    background-color: white;
+        height: 40px;
+        width: 80px;
+        border-radius: 20px;
+        margin-top: 1px;
+        margin-right: 20px;
+}
