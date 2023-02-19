@@ -1,33 +1,31 @@
-.spotClass{
+.spotclass{
     width: 280px;
     height: 280px;
 }
-.forImage{
+.forimage{
     width: 250px;
     height: 260px;
 }
-.forfirst{
+.forFirst{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    margin-top: 20px;
+    margin-top: 40px;
     margin-left: 200px;
     margin-right: 10px;
-   
-   
-    
     
 }
-.forInside{
+.forinside{
     display: flex;
     justify-content: space-between;
     width: 250px;
 }
-.forNewDiv{
+.forNew{
     height: 400px;
     width: 400px;
 }
-.forNav{
+.fornav{
     max-width: 100%;
     max-height: 100%;
+    
 }

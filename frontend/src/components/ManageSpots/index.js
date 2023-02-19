@@ -20,9 +20,9 @@ export default function ManageSpots() {
    // <button onClick={() => dispatch(removeSpotFunc(spot.id))} >Delete</button>
    // console.log('current user spots', spots)
   return (
-    <>
+    <div className='basGot'>
       <h1>Manage Spots</h1>
-      <NavLink to={'/spots/new'} > <button >Create a new Spot</button></NavLink> 
+      <NavLink  to={'/spots/new'} > <button >Create a New Spot</button></NavLink> 
       <div className='forfirst'>
           {spots.map((spot) => {
               return (
@@ -34,11 +34,11 @@ export default function ManageSpots() {
                               </div>
                               <div className='forInside'>
                                   <div>{spot.city}, {spot.state}</div>
-                                  <div>⭐️{spot.avgRating ? parseFloat(spot.avgRating).toFixed(1): 'New'}</div>
+                                  <div>{spot.avgRating ? `⭐️ ${parseFloat(spot.avgRating).toFixed(1)}` : '⭐️ New'}</div>
                               </div>
                               <div className='forInside'>
-                                  <div>{spot.price}</div>
-                                  <NavLink to={`/spots/${spot.id}/edit`}><button>Update</button></NavLink> 
+                                  <div>${spot.price} night</div>
+                                  <NavLink to={`/spots/${spot.id}/edit`}><button >Update</button></NavLink> 
                                   <div><OpenModalButton buttonText="Delete" modalComponent={<DeleteSpot spotId={spot.id} />}/></div>
                               </div>
                           </div>
@@ -47,6 +47,6 @@ export default function ManageSpots() {
               )
           })}
       </div> 
-    </>   
+    </div>   
   )
 }
