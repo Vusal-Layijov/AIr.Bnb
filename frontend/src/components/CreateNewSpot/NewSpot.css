@@ -1,0 +1,64 @@
+.top-down {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+label {
+    display: block;
+    width: 100%;
+    padding: 3px;
+}
+
+input,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 5px;
+}
+
+
+.formDown {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subButton {
+    background-color: red;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+        "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 13px 23px;
+    touch-action: manipulation;
+    user-select: none;
+    width: auto;
+}
+
+.submit-button:hover {
+    box-shadow: #222222 0 0 0 2px, rgba(255, 255, 255, 0.8) 0 0 0 4px;
+    transition: box-shadow 0.2s;
+}
+
+.top{
+    margin-top: 1px;
+}
+.formDown{
+    display: flex;
+    flex-direction: row;  
+}
+.got{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.got2{
+    display: flex;
+    justify-content: center;
+}

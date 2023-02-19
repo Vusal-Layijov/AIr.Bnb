@@ -58,9 +58,9 @@ function ProfileButton({ user }) {
                     </>
                     ) : (
                         <>
-                            <div>  <p4>{user.username}</p4></div>
-                            <div><p4>Hello {user.firstName} {user.lastName}</p4></div> 
-                            <div>    <p4>{user.email}</p4> </div> 
+                            <div>  <h4>{user.username}</h4></div>
+                            <div><h4>Hello {user.firstName} {user.lastName}</h4></div> 
+                            <div>    <h4>{user.email}</h4> </div> 
                             <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} >  <h4>Manage Spots</h4></NavLink> 
                             <button  onClick={logout}>Log Out</button>
                             

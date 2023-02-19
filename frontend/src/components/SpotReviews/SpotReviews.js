@@ -39,22 +39,26 @@ export default function SpotReviews({review, user, spotId}) {
   let toCheck = user.id == review.userId
   if(!review) return null
   return (
-    <div>
+    <div style={{marginTop:'10px'}}>
       <h3>{review.User.firstName}</h3>
-      <h4>{`${il} ${month} ${sonGun}`}</h4>
+      <h4>{`${il}-${month}-${sonGun}`}</h4>
       <p>{review.review}</p>
-      <div>
+      <div style={{ marginTop: '10px' }}>
         {toCheck ? (
-          <>
-          <OpenModalButton 
-            buttonText="Delete"
-            modalComponent={<DeleteReview spotId={spotId} review={review} />}
-          />
-             <OpenModalButton 
-            buttonText="Update"
-            modalComponent={<h1>Future is coming</h1> }
-          />
-          </>
+        <div className='deleteupdate'>
+          <div >
+              <OpenModalButton
+                buttonText="Update"
+                modalComponent={<h1>Future is coming</h1>}
+              />
+          </div>
+          <div>
+              <OpenModalButton
+                buttonText="Delete"
+                modalComponent={<DeleteReview spotId={spotId} review={review} />}
+              />
+          </div>
+        </div>
         ) : null
 
         }

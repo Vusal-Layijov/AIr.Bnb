@@ -60,7 +60,7 @@ function SetOneSPot () {
       <div className='mainDiv'>
        <h1>{singleSpot.name}</h1>
        <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-        <img src={singleSpot.SpotImages[0].url} style={{width:'1050px', height:'500px'}} ></img>
+          <img src={singleSpot.SpotImages[0].url} style={{ width: '1200px', height: '550px', marginLeft :'10px'}} ></img>
         <div>Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName} </div>
         <div className='underHost'>
           <div>{singleSpot.description}</div>
@@ -72,8 +72,9 @@ function SetOneSPot () {
                 </div>
                 <div>   {!singleSpot.numReviews
                   ? "★  New"
-                  : `★ ${parseFloat(singleSpot.avgstarrating).toFixed(1)}`}{" "}
-                  • {singleSpot.numReviews} review
+                  : `★ ${parseFloat(singleSpot.avgstarrating).toFixed(1)}•`} {" "}
+                  {singleSpot.numReviews == 0 ? '' :
+                   `${singleSpot.numReviews}  Review`}
                   {singleSpot.numReviews > 1 ? "s" : null}
                 </div>
             </div>
@@ -83,33 +84,34 @@ function SetOneSPot () {
           </div>
         </div>
         <br></br>
-          <div >
+          <div className='forBreak' >
             <h2 >
               <span>
                 ★ 
                 {!singleSpot.numReviews
-                  ? "New"
+                  ? " New"
                   : `${parseFloat(singleSpot.avgstarrating).toFixed(1) } rating • `}
-                {singleSpot.numReviews} review
+                {singleSpot.numReviews == 0 ? '' :
+                  `${singleSpot.numReviews}  Review`}
                 {singleSpot.numReviews > 1 ? "s" : ''}
               </span>
             </h2>
 
 
-            <div>
+            <div style={{margin:'2px'}}>
               {toCheck === false && user.id !== 0 && noReviewYet ? (
                 <OpenModalButton
-                  buttonText="Post Review"
+                  buttonText="Post Your Review"
                   modalComponent={<ReviewModal spotId={spotId} />}
                 />
               ) : null}
             </div>
            
-            <div >
+            <div style={{ marginBottom: '20px' }}>
               {spotReviewsArr &&
                 spotReviewsArr.map((review) => <SpotReviews review={review} user={user} spotId={spotId} />)}
             </div>
-            <div>
+            <div style={{marginBottom:'20px'}}>
               {toCheck === false && user.id !== 0 && noReviewYet && spotReviewsArr.length === 0 ? (
                 <h2>Be the first to post a review!</h2>
               ) : null}

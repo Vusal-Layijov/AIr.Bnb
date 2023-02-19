@@ -4,6 +4,8 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
   
 }
 
@@ -21,7 +23,7 @@
 }
 .mainDiv{
     margin-left: 100px;
-    margin-right: 300px;
+    margin-right: 129px;
 }
 .forReserve{
     margin: 10px;
@@ -34,4 +36,9 @@
     border-radius: 2px;
     color: aliceblue;
     margin: 5px;
+}
+.forBreak{
+    border-top-style: solid;
+        border-width: 1px 0;
+        border-color: #000;
 }
