@@ -21,8 +21,8 @@ export default function ManageSpots() {
    // console.log('current user spots', spots)
   return (
     <div className='basGot'>
-      <h1>Manage Spots</h1>
-      <NavLink  to={'/spots/new'} > <button >Create a New Spot</button></NavLink> 
+      <h1>Manage Your Spots</h1>
+          <NavLink to={'/spots/new'} > <button className='navlinkBut' >Create a New Spot</button></NavLink> 
       <div className='forfirst'>
           {spots.map((spot) => {
               return (

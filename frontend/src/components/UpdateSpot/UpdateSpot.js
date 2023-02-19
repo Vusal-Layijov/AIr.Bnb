@@ -34,6 +34,7 @@ export default function UpdateSpot() {
             setDescription(spotInfo.description)
             setTitle(spotInfo.name)
             setPrice(spotInfo.price)
+            setImage(spotInfo.SpotImages[0].url)
         }
         stateAdd()
     }, [dispatch]);
@@ -158,7 +159,7 @@ export default function UpdateSpot() {
           <form className="top-down" onSubmit={handleSubmit}>
               <h2>Update your Spot</h2>
               <h3>Where's you place located?</h3>
-              <p>Guests will only get your exact address once they booked a reservation</p>
+              <p>Guests will only get your exact address once they booked a reservation.</p>
               {hasSubmitted && validationErrors.length > 0 && (
                   <div>
                       The following errors were found:
