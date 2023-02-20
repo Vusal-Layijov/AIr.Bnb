@@ -1,4 +1,4 @@
-.sonmodal {
+.loginsonmodal {
     font-family: Arial, Helvetica, sans-serif;
     position: fixed;
     top: 50%;
@@ -16,22 +16,22 @@
     align-items: center;
 }
 
-.sonmodal h1 {
+.loginsonmodal h1 {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.sonmodal form {
+.loginsonmodal form {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.sonmodal form input[type="text"],
-.sonmodal form input[type="email"],
-.sonmodal form input[type="password"] {
+.loginsonmodal form input[type="text"],
+.loginsonmodal form input[type="email"],
+.loginsonmodal form input[type="password"] {
     width: 290px;
     padding: 5px;
     margin-bottom: 10px;
