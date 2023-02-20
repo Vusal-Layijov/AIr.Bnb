@@ -62,3 +62,12 @@ textarea {
     display: flex;
     justify-content: center;
 }
+.anaDiv{
+    display: flex;
+    flex-direction: row;
+    
+}
+.underanaDiv{
+    margin-left: 10px;
+    width: 100%;
+}
