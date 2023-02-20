@@ -293,13 +293,18 @@ export default function UpdateSpot() {
                       Competitive pricing can help your listing stand out and rank
                       higher in search results.
                   </p>
-                  <input
-                      type="text"
-                      name="price"
-                      value={price}
-                      placeholder="Price per night (USD)"
-                      onChange={updatePrice}
-                  />
+                  <div className='anaDiv'>
+                      <div>＄</div>
+                      <div className='underanaDiv'>
+                          <input
+                              type="text"
+                              name="price"
+                              value={price}
+                              placeholder="Price per night (USD)"
+                              onChange={updatePrice}
+                          />
+                      </div>
+                  </div>
               </label>
 
               <label>
