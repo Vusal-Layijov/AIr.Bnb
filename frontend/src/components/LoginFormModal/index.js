@@ -39,7 +39,7 @@ function LoginFormModal() {
 
 
     return (
-        <div className="sonmodal">
+        <div className="loginsonmodal">
             <div><h1>Log In</h1></div>
             <form onSubmit={handleSubmit}>
                 <ul>
