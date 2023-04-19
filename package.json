@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Vusal-Layijov/AIr.Bnb/issues"
   },
-  "homepage": "https://github.com/Vusal-Layijov/AIr.Bnb#readme"
+  "homepage": "https://github.com/Vusal-Layijov/AIr.Bnb#readme",
+  "dependencies": {
+    "react-datepicker": "^4.11.0"
+  }
 }

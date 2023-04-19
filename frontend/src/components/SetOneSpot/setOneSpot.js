@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { useParams,} from 'react-router-dom';
+import { NavLink, useParams,} from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAllSpots } from '../../store/spots';
 import SpotReviews from '../SpotReviews/SpotReviews';
@@ -79,7 +79,7 @@ function SetOneSPot () {
                 </div>
             </div>
             <div className='forReserve'>
-              <button className='forButton' onClick={() =>alert('This future is coming')}>Reserve</button>
+                <NavLink to={`/spots/${spotId}/bookings/new`} > <button className='forButton' >Reserve</button></NavLink>
             </div>
           </div>
         </div>
