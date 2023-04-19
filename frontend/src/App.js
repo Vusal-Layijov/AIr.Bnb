@@ -8,6 +8,7 @@ import SetOneSPot from "./components/SetOneSpot/setOneSpot";
 import CreateNewSpot from "./components/CreateNewSpot/CreateNewSpot";
 import ManageSpots from "./components/ManageSpots";
 import UpdateSpot from "./components/UpdateSpot/UpdateSpot";
+import CreateBooking from "./components/CreateBookings";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -38,7 +39,7 @@ function App() {
         <Route exact path={'/spots/new'}>
           <CreateNewSpot />
         </Route>
-        <Route path={'/spots/current'}>
+        <Route path={'/users/current'}>
           <ManageSpots />
         </Route>
         < Route exact path={'/spots/:spotId'} >
@@ -47,7 +48,9 @@ function App() {
         < Route exact path={'/spots/:spotId/edit'} >
           <UpdateSpot />
         </Route >
-       
+       <Route exact path={'/spots/:spotId/bookings/new'} >
+           <CreateBooking /> 
+       </Route>
         </Switch>
       
     </>

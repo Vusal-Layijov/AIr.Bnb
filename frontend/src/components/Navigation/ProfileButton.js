@@ -55,7 +55,7 @@ function ProfileButton({ user }) {
                 {user ? (user.username === 'Demo-lition' ? (
                     <>
                         <p>Demo User</p>
-                        <p className="forManage"> <NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > Manage Spots</NavLink></p>
+                        <p className="forManage"> <NavLink style={{ textDecoration: 'none' }} to={'/users/current'} >My profile</NavLink></p>
                         <button className="logOutBut" onClick={logout}>Log Out</button>
                        
                     
@@ -65,7 +65,7 @@ function ProfileButton({ user }) {
                         
                         <p>Hello, {user.firstName}</p>
                         <p>{user.email}</p>
-                        <p className="forManage"><NavLink style={{ textDecoration: 'none' }} to={'/spots/current'} > Manage Spots</NavLink></p>
+                        <p className="forManage"><NavLink style={{ textDecoration: 'none' }} to={'/users/current'} > My profile</NavLink></p>
                         <button className="logOutBut" onClick={logout}>Log Out</button>
 
                     </>

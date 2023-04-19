@@ -629,19 +629,28 @@ router.get('/:spotId/bookings',requireAuth, async(req,res,next)=>{
 router.post('/:spotId/bookings',requireAuth, async(req,res,next)=>{
     let spot = await Spot.findByPk(req.params.spotId)
     if (!spot) {
-        let err = new Error()
+        let err = new Error("Spot could not be found")
         err.status = 404
-        err.message = 'Spot could not be found'
+        err.errors = ['Spot could not be found']
         next(err)
     }
     let date1 = new Date(req.body.startDate)
     let date2 = new Date (req.body.endDate)
+    let date3 = new Date().getTime()
+
     let start = date1.getTime()
     let end = date2.getTime()
     if(end-start<=0){
-        let err = new Error('endDate cannot be on or before startDate')
+        let err = new Error('EndDate cannot be on or before startDate')
         err.status=400
-        next(err)
+        err.errors = ['EndDate cannot be on or before startDate']
+        return    next(err)
+    }
+    if (date3 - start >= 0) {
+        let err = new Error('Please choose different start date')
+        err.status = 400
+        err.errors = ['Please choose different start date']
+        return    next(err)
     }
     let Bookings = await Spot.findByPk(req.params.spotId,
         {
@@ -662,10 +671,8 @@ router.post('/:spotId/bookings',requireAuth, async(req,res,next)=>{
         if(start==bookingStartSec||start==bookingEndSec||end==bookingStartSec||end==bookingEndSec){
             let err = new Error ('Sorry, this spot is already booked for the specified date')
             err.status =403
-            err.errors={
-                startDate: 'Start date conflicts with existing booking',
-                endDate:'End date conflicts wih existing booking'
-            }
+            err.errors = ['Sorry, this spot is already booked']
+                
             next(err)
         }
     }
@@ -677,6 +684,7 @@ router.post('/:spotId/bookings',requireAuth, async(req,res,next)=>{
     let Owner = await spot.getUser()
     if (Owner.id !== req.user.id){
         const {startDate,endDate} = req.body
+       
         let booked = await Booking.create({
             spotId : req.params.spotId,
             userId:req.user.id,
@@ -684,13 +692,13 @@ router.post('/:spotId/bookings',requireAuth, async(req,res,next)=>{
             endDate
         })
        
-       
-        res.json(booked)
+        return res.json(booked)
     }
     else if (Owner.id == req.user.id){
-        res.json({
-           message: 'You already own it!!!!'
-        })
+        let err = new Error("You own spot alreadty! ")
+        err.status = 404
+        err.errors = ['You own spot already!']
+        next(err)
     }
 })
 

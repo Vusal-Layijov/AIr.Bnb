@@ -7,19 +7,26 @@ import './index.css'
 import { removeSpotFunc } from '../../store/spots';
 import OpenModalButton from '../OpenModalButton';
 import DeleteSpot from './DeleteSpot';
+import { get_booking_thunk } from '../../store/bookings';
 
 export default function ManageSpots() {
     const dispatch = useDispatch()
     const spots = useSelector(state => Object.values(state.spots.allSpots))
+
+    const bookings = useSelector(state => Object.values(state.bookings.user))
+    console.log(bookings)
+
     useEffect(() =>{
         dispatch(setCurrentUserSpotsFunc())
+        dispatch(get_booking_thunk())
     },[dispatch])
-    if (!spots) {
+    if (!spots || !bookings) {
         return null
     }
    // <button onClick={() => dispatch(removeSpotFunc(spot.id))} >Delete</button>
    // console.log('current user spots', spots)
   return (
+    <>
     <div className='basGot'>
       <h1>Manage Your Spots</h1>
           <NavLink to={'/spots/new'} > <button className='navlinkBut' >Create a New Spot</button></NavLink> 
@@ -47,6 +54,31 @@ export default function ManageSpots() {
               )
           })}
       </div> 
-    </div>   
+    </div>
+    <div>
+              <h1>Manage Your Bookings</h1>
+              <NavLink to={'/'} > <button className='navlinkBut' >Create a New Booking</button></NavLink> 
+              {bookings.map((booking) => {
+                  return (
+                      <div key={booking.id} >
+                          <p style={{ fontWeight: 'bold' }} >At: {booking.Spot.name}</p>
+                          <p>Date: {new Date(booking.startDate).toISOString().slice(0, 10)} - {new Date(booking.endDate).toISOString().slice(0, 10)}</p>
+                          {/* <p className="forDesc" >Special notes: {booking.notes}</p> */}
+                          <div className='spotClass' >
+                              <img src={booking.Spot.previewImage} className='forImage'></img>
+                          </div>
+                          <div className="forbook" >
+                              <NavLink to={`/bookings/${booking.id}/edit`} > <button className="globalmodal" >Update</button> </NavLink>
+                              <div><OpenModalButton className={'default-button curs rd-bg'} buttonText="Delete"  /></div>
+
+                          </div>
+                      </div>
+
+                  )
+              })
+
+              }
+    </div>
+    </>   
   )
 }
