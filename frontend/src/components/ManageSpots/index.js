@@ -8,8 +8,10 @@ import { removeSpotFunc } from '../../store/spots';
 import OpenModalButton from '../OpenModalButton';
 import DeleteSpot from './DeleteSpot';
 import { get_booking_thunk } from '../../store/bookings';
+import DeleteBooking from '../DeleteBooking';
 
 export default function ManageSpots() {
+    
     const dispatch = useDispatch()
     const spots = useSelector(state => Object.values(state.spots.allSpots))
 
@@ -55,29 +57,34 @@ export default function ManageSpots() {
           })}
       </div> 
     </div>
-    <div>
+    <div className='basGot' >
               <h1>Manage Your Bookings</h1>
-              <NavLink to={'/'} > <button className='navlinkBut' >Create a New Booking</button></NavLink> 
+              <NavLink to={'/'} > <button className='navlinkBut' >Create a New Booking</button></NavLink>
+              <div className='forfirst' > 
               {bookings.map((booking) => {
                   return (
-                      <div key={booking.id} >
-                          <p style={{ fontWeight: 'bold' }} >At: {booking.Spot.name}</p>
+                      <div className='forNewDiv' key={booking.id} >
+                            <div className='nameDelete' >
+                                 <p style={{ fontWeight: 'bold' }} >At: {booking.Spot.name}</p>
+                                 <div><OpenModalButton className={'default-button curs rd-bg'} buttonText={<i class="fas fa-trash-alt"></i>} modalComponent={<DeleteBooking />} /></div>
+
+                            </div>
                           <p>Date: {new Date(booking.startDate).toISOString().slice(0, 10)} - {new Date(booking.endDate).toISOString().slice(0, 10)}</p>
                           {/* <p className="forDesc" >Special notes: {booking.notes}</p> */}
                           <div className='spotClass' >
                               <img src={booking.Spot.previewImage} className='forImage'></img>
                           </div>
-                          <div className="forbook" >
+                          {/* <div className="forbook" >
                               <NavLink to={`/bookings/${booking.id}/edit`} > <button className="globalmodal" >Update</button> </NavLink>
-                              <div><OpenModalButton className={'default-button curs rd-bg'} buttonText="Delete"  /></div>
 
-                          </div>
+                          </div> */}
                       </div>
 
                   )
               })
 
               }
+              </div>
     </div>
     </>   
   )
