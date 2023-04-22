@@ -8,7 +8,7 @@ import PlacesAutocomplete, {
     getLatLng,
 } from 'react-places-autocomplete';
 import './index.css'
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const libraries = ['places', 'geometry', 'marker']
 
@@ -94,7 +94,7 @@ function createCenterControl(myMap){
 
     return controlButton;
 }
-function initMap(spots) {
+function initMap(spots, spotId) {
     const map = new window.google.maps.Map(document.getElementById("map"),{
         zoom:4,
         center: { lat: 40.7128, lng: -74.0060 },
@@ -116,10 +116,10 @@ function initMap(spots) {
     );
     let index = 1
 
-    spots.forEach((business) => {
-        if (business && business.lat && business.lng) {
+    spots.forEach((spot) => {
+        if (spot && spot.lat && spot.lng) {
             const marker = new window.google.maps.Marker({
-                position: { lat: Number(business.lat), lng: Number(business.lng) },
+                position: { lat: Number(spot.lat), lng: Number(spot.lng) },
                 map,
                 optimized: false,
                 label: {
@@ -141,8 +141,16 @@ function initMap(spots) {
                     zIndex: '1'
                 },
                 icon: null,
-                businessId: business.id
+                spotId: spot.id,
+                
             });
+            if(spot.id == spotId){
+                marker.setIcon({
+                    url: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                    scaledSize: new window.google.maps.Size(40, 40),
+                    labelOrigin: new window.google.maps.Point(20, 20),
+                })
+            }
             index++
 
             markers.push(marker);
@@ -150,19 +158,19 @@ function initMap(spots) {
 
             const infowindow = new window.google.maps.InfoWindow({
                 content: `
-          <a href="/spots/${business.id}" class="infowindow">
-            <div class="infowindow-title">${business.name}</div>
+          <a href="/spots/${spot.id}" class="infowindow">
+            <div class="infowindow-title">${spot.name}</div>
             <div class="infowindow-image-container">
-              <img src="${business.previewImage}" alt="Preview Image" class="infowindow-image">
+              <img src="${spot.previewImage}" alt="Preview Image" class="infowindow-image">
             </div>
           </a>
         `,
             });
 
-            // marker.addListener("click", () => {
-            //     infowindow.open(map, marker);
-            //     window.location.href = `/spots/${business.id}`;
-            // });
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
+                window.location.href = `/spots/${spot.id}`;
+            });
             marker.addListener("mouseover", () => {
                 infowindow.open(map, marker);
             });
@@ -176,7 +184,7 @@ function initMap(spots) {
 
     markers.forEach((marker) => {
         marker.addListener("click", () => {
-            window.location.href = `/spots/${marker.businessId}`;
+            window.location.href = `/spots/${marker.spotId}`;
         });
     });
 }
@@ -203,6 +211,8 @@ function initMap(spots) {
 //     return <div id="map" className="map"></div>;
 // }
 function SpotsMap({ spots }) {
+    const {spotId} = useParams()
+    console.log('spotId----------->',spotId)
   useEffect(() => {
     // Check if Google Maps API has already been loaded
     if (!window.google || !window.google.maps) {
@@ -211,7 +221,7 @@ function SpotsMap({ spots }) {
       script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
       script.async = true;
       script.onload = () => {
-        initMap(spots);
+        initMap(spots,spotId);
       };
       document.head.appendChild(script);
 
@@ -220,7 +230,7 @@ function SpotsMap({ spots }) {
       };
     } else {
       // Google Maps API is already loaded, so just call initMap directly
-      initMap(spots);
+      initMap(spots,spotId);
     }
   }, [spots]);
 
