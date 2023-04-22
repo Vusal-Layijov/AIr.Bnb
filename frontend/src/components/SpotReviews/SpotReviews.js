@@ -5,6 +5,7 @@ import { reviewMakerFunc } from '../../store/review'
 import DeleteReview from '../DeleteReview/DeleteReview'
 import OpenModalButton from '../OpenModalButton'
 import './SpotReviews.css'
+import UpdateReview from '../UpdateReview'
 export default function SpotReviews({review, user, spotId}) {
     const dispatch = useDispatch()
   //  console.log('review from spotrewies', reviews)
@@ -49,7 +50,7 @@ export default function SpotReviews({review, user, spotId}) {
           <div >
               <OpenModalButton
                 buttonText="Update"
-                modalComponent={<h1>Future is coming</h1>}
+                modalComponent={<UpdateReview oldReview={review} spotId={spotId} />}
               />
           </div>
           <div>

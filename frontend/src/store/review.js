@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf"
 const GET_SPOT_REVIEWS = 'reviews/GET_REVIEW'
 const ADD_NEW_REVIEW = 'reviews/ADD_NEW_REVIEW'
 const REMOVE_REVIEW = 'reviews/REMOVE_REVIEW'
+const EDIT_REVIEW = 'reviews/EDIT_REVIEW'
 const reviewMaker = (payload) =>{
     return {
         type:GET_SPOT_REVIEWS,
@@ -19,6 +20,7 @@ const removeReview = (payload) =>{
         payload
 }
 }
+
 
 export const reviewMakerFunc = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
@@ -56,6 +58,18 @@ export const removeReviewFunc  = (reviewId) => async dispatch =>{
     }
 }
 
+export  const edit_review_thunk = (id, review) => async dispatch =>{
+    const response = await csrfFetch(`/api/reviews/${id}`,{
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(review)
+    })
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(reviewAdder(data))
+        return data
+    }
+}
 
 const initialState = {spot:{}, user:{}}
 const reviewReducer = (state = initialState, action) =>{

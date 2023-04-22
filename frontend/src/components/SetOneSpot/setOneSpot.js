@@ -9,12 +9,15 @@ import './SetOneSpot.css'
 import { setOneSpotDetails } from '../../store/spots';
 import OpenModalButton from '../OpenModalButton';
 import ReviewModal from '../ReviewModal';
+import Map from '../Map';
+import SpotsMap from '../Map';
 function SetOneSPot () {
   const { spotId } = useParams()
   let user = useSelector(state =>state.session.user);
     console.log('userrrrrrrIDDD', user)
   const spotReviews = useSelector(state =>  state.reviews.spot)
   const singleSpot =useSelector (state => state.spots.singleSpot)
+  const spots = useSelector(state => Object.values(state.spots.allSpots))
    console.log('gediremmi datatatatat',singleSpot)
     const dispatch = useDispatch()
  
@@ -24,6 +27,7 @@ function SetOneSPot () {
   useEffect(() => {
     dispatch(setOneSpotDetails(Number(spotId)))
     dispatch(reviewMakerFunc(spotId))
+    dispatch(setAllSpots())
   },[dispatch] )  
   // useEffect(() => {
     
@@ -48,7 +52,7 @@ function SetOneSPot () {
   let noReviewYet = true
   if (spotReviewsArr.length > 0) {
     spotReviewsArr.forEach(review => {
-      if (review.User.id === user.id) noReviewYet = false;
+      if (review.User?.id === user?.id) noReviewYet = false;
     });
   }
  // <div>{singleSpot.avgstarrating}⭐️ . {singleSpot.numReviews} reviews</div>
@@ -60,7 +64,10 @@ function SetOneSPot () {
       <div className='mainDiv'>
        <h1>{singleSpot.name}</h1>
        <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-          <img src={singleSpot.SpotImages[0].url} style={{ width: '1210px', height: '550px', marginLeft :'2px'}} ></img>
+          <div className='mapImage' >
+          <img src={singleSpot.SpotImages[0].url} style={{ width: '650px', height: '550px', marginLeft :'2px'}} ></img>
+          <SpotsMap spots={spots} />
+          </div>
         <div>Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName} </div>
         <div className='underHost'>
           <div>{singleSpot.description}</div>

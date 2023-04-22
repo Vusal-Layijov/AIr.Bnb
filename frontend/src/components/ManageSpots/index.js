@@ -66,7 +66,7 @@ export default function ManageSpots() {
                       <div className='forNewDiv' key={booking.id} >
                             <div className='nameDelete' >
                                  <p style={{ fontWeight: 'bold' }} >At: {booking.Spot.name}</p>
-                                 <div><OpenModalButton className={'default-button curs rd-bg'} buttonText={<i class="fas fa-trash-alt"></i>} modalComponent={<DeleteBooking />} /></div>
+                                 <div><OpenModalButton className={'default-button curs rd-bg'} buttonText={<i class="fas fa-trash-alt"></i>} modalComponent={<DeleteBooking bookingId={booking.id} />} /></div>
 
                             </div>
                           <p>Date: {new Date(booking.startDate).toISOString().slice(0, 10)} - {new Date(booking.endDate).toISOString().slice(0, 10)}</p>

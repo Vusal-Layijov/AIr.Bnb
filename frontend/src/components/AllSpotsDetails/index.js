@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, Route, useParams } from 'react-router-dom';
 import { setAllSpots } from '../../store/spots';
 import './index.css'
+import SpotsMap from '../Map';
 
 export default function AllSpotsDetails() {
     const dispatch = useDispatch()

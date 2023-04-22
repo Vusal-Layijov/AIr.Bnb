@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Vusal-Layijov/AIr.Bnb#readme",
   "dependencies": {
-    "react-datepicker": "^4.11.0"
+    "react-datepicker": "^4.11.0",
+    "react-map-gl": "^7.0.23"
   }
 }
