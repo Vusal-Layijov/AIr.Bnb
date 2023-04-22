@@ -17,8 +17,11 @@ export default function ReviewModal({spotId}) {
         if (review.length < 10) {
             sonErrors.push("Review must be 10 or more characters");
         }
+        if(!stars){
+            sonErrors.push("Stars are required")
+        }
         setErrors(sonErrors);
-    }, [review]);
+    }, [review,stars]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -1,0 +1,72 @@
+.map-container {
+    margin-left: 5px;
+    height: 550px;
+    width: 600px;
+}
+.map-container-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.map-container {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.infowindow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    width: 200px;
+    text-decoration: none;
+    color: black;
+}
+
+.infowindow-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.infowindow-price {
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.infowindow-image-container {
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.infowindow-image {
+    width: 100%;
+    height: auto;
+}
+
+.infowindow-image::before {
+    content: "";
+    display: block;
+    padding-top: 75%;
+}
+
+.infowindow-header {
+    display: flex;
+    flex-direction: row;
+
+}
+.map{
+    width: 565px;
+    height: 550px;
+}

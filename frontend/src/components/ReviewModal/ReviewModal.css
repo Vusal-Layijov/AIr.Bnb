@@ -109,7 +109,7 @@
     white-space: nowrap;
     cursor: pointer;
     font-size: 30px;
-    color: #ccc;
+    color: rgb(144, 113, 113);
 }
 
 .rate:not(:checked)>label:before {

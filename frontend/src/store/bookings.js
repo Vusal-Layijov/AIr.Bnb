@@ -42,7 +42,10 @@ export const create_booking_thunk = (spotId, booking) => async dispatch => {
 }
 
 export const delete_booking_thunk = (id) => async (dispatch) =>{
-    const response  = await csrfFetch(`/api/bookings/${id}`)
+    const response  = await csrfFetch(`/api/bookings/${id}`,{
+        method:"DELETE",
+        headers: { "Content-Type": "application/json" }
+    })
     if (response.ok) {
         dispatch(delete_boking_action(id))
     }
