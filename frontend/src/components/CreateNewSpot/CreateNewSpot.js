@@ -3,6 +3,13 @@ import { useDispatch } from 'react-redux';
 import { createSpotFunc } from '../../store/spots';
 import { useHistory } from 'react-router-dom';
 import './NewSpot.css'
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  geocodeByPlaceId,
+  getLatLng,
+} from 'react-places-autocomplete';
+const libraries = ['places']
 export default function CreateNewSpot() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -18,6 +25,7 @@ export default function CreateNewSpot() {
   const [longitude, setLongitude] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+
 
   const updateCountry = (e) => setCountry(e.target.value);
   const updateAddress = (e) => setAddress(e.target.value);
@@ -44,12 +52,12 @@ export default function CreateNewSpot() {
     if (state.length === 0) {
       errors.push( "State is required");
     }
-    if (latitude.length === 0) {
-      errors.push("Latitude is required");
-    }
-    if (longitude.length === 0) {
-      errors.push("Longitude is required");
-    }
+    // if (latitude.length === 0) {
+    //   errors.push("Latitude is required");
+    // }
+    // if (longitude.length === 0) {
+    //   errors.push("Longitude is required");
+    // }
     if (description.length < 30) {
       errors.push("Description needs a minimum of 30 characters");
     }
@@ -62,12 +70,32 @@ export default function CreateNewSpot() {
     if (image.length === 0) {
       errors.push("Preview image is required");
     }
+    if (!address) {
+      errors.push('Address is required')
+    }
 
     
 
     setValidationErrors (errors);
-  }, [country, address, city, state, latitude, longitude, description, title, price, image]);
+  }, [country, address, city, state,description, title, price, image]);
 
+  const {isLoaded} = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+    libraries:libraries
+  })
+  const handleSelect = async address =>{
+    setAddress(() => address)
+    const results = await geocodeByAddress(address)
+    const latlng = await getLatLng(results[0])
+    const addressArr = results[0].formatted_address.split(',').map(el =>el.trim())
+    console.log('address------>',addressArr)
+    setAddress(() => addressArr[0])
+    setCity(() => addressArr[1])
+    setState(() => addressArr[2].split(' ')[0])
+    setCountry(()=>addressArr[3])
+    setLatitude(() => latlng.lat)
+    setLongitude(() => latlng.lng)
+  }
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
@@ -77,8 +105,8 @@ export default function CreateNewSpot() {
       address:address,
       city:city,
       state:state,
-      lat: latitude,
-      lng: longitude,
+      lat: +latitude,
+      lng: +longitude,
       country:country,
       name:title,
       description:description,
@@ -103,7 +131,7 @@ export default function CreateNewSpot() {
     setLongitude('')
     setHasSubmitted(false);
   }
-
+  if (!isLoaded) return (<div>Loading...</div>)
   return (
     <div className='top' >
  
@@ -122,6 +150,53 @@ export default function CreateNewSpot() {
           </div>
         )}
         <label>
+          Street Address{" "}
+
+          <PlacesAutocomplete
+            value={address}
+            onChange={setAddress}
+            onSelect={handleSelect}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <label className='autocomplete-label'>
+                {/* <div>
+                  Street Address {(hasSubmitted && validationErrors.address.length) ? <p className='form-error'>{validationErrors.address}</p> : (<></>)}
+                </div> */}
+                <input
+                  {...getInputProps({
+                    placeholder: 'Address',
+                    className: 'location-search-input',
+                  })}
+                />
+                <div className="autocomplete-dropdown-container">
+                  {loading && <div>Loading...</div>}
+                  {!loading && suggestions.map(suggestion => {
+                    const className = 'suggestion-item'
+                    //   const className = suggestion.active
+                    //   ? 'suggestion-item--active'
+                    //   : 'suggestion-item';
+                    // inline style for demonstration purpose
+                    const style = suggestion.active
+                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                    return (
+                      <div className='auto-dropdown'
+                        {...getSuggestionItemProps(suggestion, {
+                          className,
+                          style,
+                        })}
+                      >
+                        <span>{suggestion.description}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+              </label>
+            )}
+          </PlacesAutocomplete>
+        </label>
+        <label>
           Country{" "}
           <input
             type="text"
@@ -129,17 +204,6 @@ export default function CreateNewSpot() {
             value={country}
             placeholder="Country"
             onChange={updateCountry}
-          />
-        </label>
-        <label>
-          Street Address{" "}
-
-          <input
-            type="text"
-            name="streetAddress"
-            value={address}
-            placeholder="Street Address"
-            onChange={updateAddress}
           />
         </label>
         <div className="formDown">
@@ -157,7 +221,7 @@ export default function CreateNewSpot() {
            </label>
            </div>
            <div className='got2'>
-           <label>
+           {/* <label>
                 Latitude{" "}
 
                 <input
@@ -167,7 +231,7 @@ export default function CreateNewSpot() {
                   placeholder="Latitude"
                   onChange={(e) => setLatitude(e.target.value)}
                 />
-           </label>
+           </label> */}
            </div>
           </div>
           <div>
@@ -188,7 +252,7 @@ export default function CreateNewSpot() {
           </label>
           </div>
           <div>
-          <label>
+          {/* <label>
             Longitude{" "}
            
             <input
@@ -198,7 +262,7 @@ export default function CreateNewSpot() {
               placeholder="Longitude"
               onChange={(e) => setLongitude(e.target.value)}
             />
-          </label>
+          </label> */}
           </div>
           </div>
         </div>
