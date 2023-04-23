@@ -41,7 +41,7 @@ export default function SpotReviews({review, user, spotId}) {
   if(!review) return null
   return (
     <div style={{marginTop:'10px'}}>
-      <h3>{review.User.firstName}</h3>
+      <h3>{review.User?.firstName}</h3>
       <h4>{`${il}-${month}-${sonGun}`}</h4>
       <p>{review.review}</p>
       <div style={{ marginTop: '10px' }}>
