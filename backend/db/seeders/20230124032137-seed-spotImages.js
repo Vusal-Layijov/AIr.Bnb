@@ -47,7 +47,22 @@ module.exports = {
        spotId: 6,
        url: 'https://www.keralahouseplanner.com/wp-content/uploads/2012/04/awesome-house-elevation.jpg',
        preview: true
-     }
+     },
+     {
+       spotId: 7,
+       url: 'https://www.dreamystays.com/wp-content/uploads/2017/11/airbnb-kauai-princeville-budget.jpg',
+       preview: true
+     },
+     {
+       spotId: 8,
+       url: 'https://www.dreamystays.com/wp-content/uploads/2020/11/5c64c430-ac84-4e82-9d52-3f5dd65f2fb2.jpg',
+       preview: true
+     },
+     {
+       spotId: 9,
+       url: 'https://static3.therichestimages.com/wordpress/wp-content/uploads/2016/02/8f748cd7f497b64ee36d3ccd3df05a54-e1455829540909.jpg',
+       preview: true
+     },
    ])
   },
 

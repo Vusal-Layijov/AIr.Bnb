@@ -91,6 +91,42 @@ module.exports = {
         name: 'Sarah',
         description: 'Best of the best.',
         price: 109.50 ,
+      },
+      {
+        ownerId: 3,
+        address: '5500 E River Rd',
+        city: 'Tucson',
+        state: 'AZ',
+        country: 'USA',
+        lat: 32.2568,
+        lng: -110.8200,
+        name: 'Sonoran Desert Oasis',
+        description: 'Experience the beauty of the Sonoran Desert in style.',
+        price: 200.00,
+      },
+      {
+        ownerId: 2,
+        address: '2000 Sunset Blvd',
+        city: 'Los Angeles',
+        state: 'CA',
+        country: 'USA',
+        lat: 34.0974,
+        lng: -118.3295,
+        name: 'Hollywood Hills Mansion',
+        description: 'Live like a movie star in this luxurious mansion.',
+        price: 500.00,
+      },
+      {
+        ownerId: 1,
+        address: '300 Newbury St',
+        city: 'Boston',
+        state: 'MA',
+        country: 'USA',
+        lat: 42.3486,
+        lng: -71.0892,
+        name: 'Chic Urban Loft',
+        description: 'Experience the best of Boston in this stylish loft.',
+        price: 150.00,
       }
 
     ],{})
@@ -107,7 +143,7 @@ module.exports = {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      id: { [Op.in]: [1,2,3,4,5,6] }
+      id: { [Op.in]: [1,2,3,4,5,6,7,8,9] }
     }, {});
   }
 };
