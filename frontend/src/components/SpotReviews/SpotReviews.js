@@ -31,7 +31,7 @@ export default function SpotReviews({review, user, spotId}) {
   let gun = review.createdAt
   let gunParsed = Date.parse(gun)
   let obj = new Date (gunParsed)
-  console.log(obj)
+  
   let newdate = obj.toString()
   let vaxtarr = newdate.split(' ')
   let month = vaxtarr[1]

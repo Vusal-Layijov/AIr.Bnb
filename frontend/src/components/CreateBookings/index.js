@@ -49,13 +49,12 @@ export default function CreateBooking(){
             startDate:formData.startDate,
             endDate:formData.endDate
         }
-        console.log("sopodcijdcjdocj",spotId)
+      
        let booked = await dispatch(create_booking_thunk(spotId,newBooking))
         
        .catch(
            async (res) => {
                const data = await res.json();
-               console.log('data----------------',data)
                let errors= []
                if (data && data.errors) {
                 

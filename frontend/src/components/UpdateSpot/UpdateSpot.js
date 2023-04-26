@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { updateSpotFunc } from '../../store/spots';
 import { setAllSpots, setCurrentUserSpotsFunc, setOneSpotDetails } from '../../store/spots';
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    geocodeByPlaceId,
+    getLatLng,
+} from 'react-places-autocomplete';
+const libraries = ['places']
 export default function UpdateSpot() {
     const {spotId} = useParams()
     const dispatch = useDispatch();
@@ -92,12 +99,12 @@ export default function UpdateSpot() {
         if (state.length === 0) {
             errors.push("State is required");
         }
-        if (latitude.length === 0) {
-            errors.push("Latitude is required");
-        }
-        if (longitude.length === 0) {
-            errors.push("Longitude is required");
-        }
+        // if (latitude.length === 0) {
+        //     errors.push("Latitude is required");
+        // }
+        // if (longitude.length === 0) {
+        //     errors.push("Longitude is required");
+        // }
         if (description.length < 30) {
             errors.push("Description needs a minimum of 30 characters");
         }
@@ -114,9 +121,24 @@ export default function UpdateSpot() {
 
 
         setValidationErrors(errors);
-    }, [country, address, city, state, latitude, longitude, description, title, price, image]);
+    }, [country, address, city, state, description, title, price, image]);
 
-
+    const {isLoaded} = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
+        libraries:libraries
+    })
+    const handleSelect = async address => {
+        setAddress(() => address)
+        const results = await geocodeByAddress(address)
+        const latlng = await getLatLng(results[0])
+        const addressArr = results[0].formatted_address.split(',').map(el => el.trim())
+        setAddress(() => addressArr[0])
+        setCity(() => addressArr[1])
+        setState(() => addressArr[2].split(' ')[0])
+        setCountry(() => addressArr[3])
+        setLatitude(() => latlng.lat)
+        setLongitude(() => latlng.lng)
+    }
   
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -134,7 +156,7 @@ export default function UpdateSpot() {
             price: price,
             SpotImage: image
         }
-        console.log('after update button',spot)
+       
        let updatedSpot = await dispatch(updateSpotFunc(spotId, spot))
         
         if (updatedSpot) {
@@ -152,7 +174,7 @@ export default function UpdateSpot() {
         setLongitude('')
         setHasSubmitted(false);
     }
-
+    if (!isLoaded) return (<div>Loading...</div>)
   return (
       <div className='top' >
 
@@ -170,6 +192,54 @@ export default function UpdateSpot() {
                       </ul>
                   </div>
               )}
+              
+              <label>
+                  Street Address{" "}
+
+                  <PlacesAutocomplete
+                      value={address}
+                      onChange={setAddress}
+                      onSelect={handleSelect}
+                  >
+                      {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                          <label className='autocomplete-label'>
+                              {/* <div>
+                  Street Address {(hasSubmitted && validationErrors.address.length) ? <p className='form-error'>{validationErrors.address}</p> : (<></>)}
+                </div> */}
+                              <input
+                                  {...getInputProps({
+                                      placeholder: 'Address',
+                                      className: 'location-search-input',
+                                  })}
+                              />
+                              <div className="autocomplete-dropdown-container">
+                                  {loading && <div>Loading...</div>}
+                                  {!loading && suggestions.map(suggestion => {
+                                      const className = 'suggestion-item'
+                                      //   const className = suggestion.active
+                                      //   ? 'suggestion-item--active'
+                                      //   : 'suggestion-item';
+                                      // inline style for demonstration purpose
+                                      const style = suggestion.active
+                                          ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                          : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                      return (
+                                          <div className='auto-dropdown'
+                                              {...getSuggestionItemProps(suggestion, {
+                                                  className,
+                                                  style,
+                                              })}
+                                          >
+                                              <span>{suggestion.description}</span>
+                                          </div>
+                                      );
+                                  })}
+                              </div>
+
+                          </label>
+                      )}
+                  </PlacesAutocomplete>
+              </label>
               <label>
                   Country{" "}
                   <input
@@ -178,17 +248,6 @@ export default function UpdateSpot() {
                       value={country}
                       placeholder="Country"
                       onChange={updateCountry}
-                  />
-              </label>
-              <label>
-                  Street Address{" "}
-
-                  <input
-                      type="text"
-                      name="streetAddress"
-                      value={address}
-                      placeholder="Street Address"
-                      onChange={updateAddress}
                   />
               </label>
               <div className="formDown">
@@ -206,17 +265,6 @@ export default function UpdateSpot() {
                           </label>
                       </div>
                       <div className='got2'>
-                          <label>
-                              Latitude{" "}
-
-                              <input
-                                  type="text"
-                                  name="latitude"
-                                  value={latitude}
-                                  placeholder="Latitude"
-                                  onChange={(e) => setLatitude(e.target.value)}
-                              />
-                          </label>
                       </div>
                   </div>
                   <div>
@@ -237,17 +285,6 @@ export default function UpdateSpot() {
                           </label>
                       </div>
                       <div>
-                          <label>
-                              Longitude{" "}
-
-                              <input
-                                  type="text"
-                                  name="longitude"
-                                  value={longitude}
-                                  placeholder="Longitude"
-                                  onChange={(e) => setLongitude(e.target.value)}
-                              />
-                          </label>
                       </div>
                   </div>
               </div>

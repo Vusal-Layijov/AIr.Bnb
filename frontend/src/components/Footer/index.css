@@ -1,0 +1,24 @@
+footer {
+    margin-top: 20px;
+    position: relative;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+.footerdiv {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    gap: 50px;
+    margin-left: 60px;
+}
+.mylinkk {
+    color: rgb(103, 90, 90);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+
+}
+.footer-bottom {
+    color: rgb(130, 124, 124);
+}

@@ -40,6 +40,7 @@ display: flex;
 #box {
     position: relative;
     height: 1vh;
+    z-index: 2;
 }
 .forProfile{
     background-color: white;
