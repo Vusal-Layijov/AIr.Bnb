@@ -212,7 +212,7 @@ function initMap(spots, spotId) {
 // }
 function SpotsMap({ spots }) {
     const {spotId} = useParams()
-    console.log('spotId----------->',spotId)
+  
   useEffect(() => {
     // Check if Google Maps API has already been loaded
     if (!window.google || !window.google.maps) {

@@ -14,11 +14,11 @@ import SpotsMap from '../Map';
 function SetOneSPot () {
   const { spotId } = useParams()
   let user = useSelector(state =>state.session.user);
-    console.log('userrrrrrrIDDD', user)
+
   const spotReviews = useSelector(state =>  state.reviews.spot)
   const singleSpot =useSelector (state => state.spots.singleSpot)
   const spots = useSelector(state => Object.values(state.spots.allSpots))
-   console.log('gediremmi datatatatat',singleSpot)
+
     const dispatch = useDispatch()
  
   // useEffect(() => {
@@ -57,7 +57,7 @@ function SetOneSPot () {
   }
  // <div>{singleSpot.avgstarrating}⭐️ . {singleSpot.numReviews} reviews</div>
   let toCheck = singleSpot.Owner.id == user.id
-  console.log('checkinnng ', )
+
     return (
     <>  
  

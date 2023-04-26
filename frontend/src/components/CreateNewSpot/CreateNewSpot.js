@@ -88,7 +88,6 @@ export default function CreateNewSpot() {
     const results = await geocodeByAddress(address)
     const latlng = await getLatLng(results[0])
     const addressArr = results[0].formatted_address.split(',').map(el =>el.trim())
-    console.log('address------>',addressArr)
     setAddress(() => addressArr[0])
     setCity(() => addressArr[1])
     setState(() => addressArr[2].split(' ')[0])
