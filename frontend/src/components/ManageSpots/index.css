@@ -115,3 +115,16 @@
     display: flex;
     gap: 132px;
 }
+.forButStyle {
+    background-color: #0077B5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 10px;
+    cursor: pointer;
+    margin: 1px;
+}
+.forButStyle:hover {
+    opacity: 0.8;
+}

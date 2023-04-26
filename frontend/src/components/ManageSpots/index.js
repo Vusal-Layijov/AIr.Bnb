@@ -47,8 +47,8 @@ export default function ManageSpots() {
                               </div>
                               <div className='forInside'>
                                   <div>${spot.price} night</div>
-                                  <NavLink to={`/spots/${spot.id}/edit`}><button >Update</button></NavLink> 
-                                  <div><OpenModalButton buttonText="Delete" modalComponent={<DeleteSpot spotId={spot.id} />}/></div>
+                                  <NavLink to={`/spots/${spot.id}/edit`}><button className='forButStyle' >Update</button></NavLink> 
+                                  <div ><OpenModalButton buttonText="Delete" modalComponent={<DeleteSpot spotId={spot.id} />}/></div>
                               </div>
                           </div>
                       </div>
