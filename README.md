@@ -6,7 +6,7 @@ Air-we is Airbnb.com clone project.  Users can log in, sign-up, create bookings 
 [Air-we](https://air-we.onrender.com)
 
 ## Built with
-* Express,JavaScript
+* Express,JavaScript,Sequelize
 * React,Redux
 
 ## Database Schema Design
