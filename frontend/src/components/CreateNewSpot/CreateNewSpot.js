@@ -335,7 +335,7 @@ export default function CreateNewSpot() {
           />
         </label>
         
-        <label>
+        {/* <label>
           <input
             type="text"
             name="photo1"
@@ -371,7 +371,7 @@ export default function CreateNewSpot() {
             onChange={(e) => alert('This future is coming, you can add preview image for now!!')}
           />
         </label>
-        <br />
+        <br /> */}
         <div className='got2'>
         <button className="subButton" type="submit">
           Create Spot

@@ -344,7 +344,7 @@ export default function UpdateSpot() {
                   </div>
               </label>
 
-              <label>
+              {/* <label>
                   <h3>Liven up your spot with photos</h3>
                   <p>
                       Competitive pricing can help your listing stand out and rank
@@ -395,7 +395,7 @@ export default function UpdateSpot() {
                       onChange={(e) => alert('This future is coming, you can add preview image for now!!')}
                   />
               </label>
-              <br />
+              <br /> */}
               <div className='got2'>
                   <button className="subButton" type="submit">
                       Update Spot
