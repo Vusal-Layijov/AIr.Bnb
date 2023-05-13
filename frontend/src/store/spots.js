@@ -78,37 +78,44 @@ export const setCurrentUserSpotsFunc = () => async dispatch =>{
 
 
 
-export const createSpotFunc = (spot,formData) => async dispatch =>{
+export const createSpotFunc = (spot,images) => async dispatch =>{
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spot),
     })
     let NewSpot
-    if(response.ok){
-        NewSpot = await response.json()
-        
-        console.log('formdata----------->', formData.has('images'))
-        const form = new FormData()
-        const images = formData.getAll('images')
-        for(let i =0; i<images.length; i++){
-            form.append('images',images[i])
-        }
-        const forImage = await csrfFetch(`/api/spots/${NewSpot.id}/images`,{
-            method:'POST',
-            headers: { 'Content-Type': `multipart/form-data; boundary=${form._boundary}`},
-            body: form
-        })
-        if(forImage.ok){
-            // const ImgData = await forImage.json()
-            // const toStore = {...NewSpot, previewImage:ImgData.url}
 
-            //for aws
-            // const toStore = await dispatch(setOneSpotDetails(NewSpot.id))
-            // dispatch(createSpot(toStore))
-            return NewSpot.id
-        }
-    }
+
+
+
+
+
+
+    // if(response.ok){
+    //     NewSpot = await response.json()
+        
+    //     console.log('formdata----------->', formData.has('images'))
+    //     const form = new FormData()
+    //     const images = formData.getAll('images')
+    //     for(let i =0; i<images.length; i++){
+    //         form.append('images',images[i])
+    //     }
+    //     const forImage = await csrfFetch(`/api/spots/${NewSpot.id}/images`,{
+    //         method:'POST',
+    //         headers: { 'Content-Type': `multipart/form-data; boundary=${form._boundary}`},
+    //         body: form
+    //     })
+    //     if(forImage.ok){
+    //         // const ImgData = await forImage.json()
+    //         // const toStore = {...NewSpot, previewImage:ImgData.url}
+
+    //         //for aws
+    //         // const toStore = await dispatch(setOneSpotDetails(NewSpot.id))
+    //         // dispatch(createSpot(toStore))
+    //         return NewSpot.id
+    //     }
+    // }
 }
 
 export const removeSpotFunc = (spotId) => async dispatch => {
