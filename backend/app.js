@@ -1,3 +1,6 @@
+process.on('unhandledRejection', (reason, p) => {
+    console.error('Unhandled Rejection at:', p, 'reason:', reason);
+});
 const express = require('express');
 require('express-async-errors');
 const morgan = require('morgan');
@@ -9,9 +12,13 @@ const { environment } = require('./config');
 const isProduction = environment === 'production';
 const app = express();
 const { ValidationError } = require('sequelize');
+//for aws
+// const multer =require('multer')
+// app.use(multer().array('images'))
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({limit:'500mb'}));
+app.use(express.urlencoded({limit:'500mb',extended:false}))
 
 const routes = require('./routes');
 
@@ -60,5 +67,10 @@ app.use((err, _req, res, _next) => {
         stack: isProduction ? null : err.stack
     });
 });
+
+// const PORT = process.env.PORT || 8000
+// app.listen(PORT, () => {
+//     console.log(`Server is listening om port ${PORT}`)
+// })
 
 module.exports = app;

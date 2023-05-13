@@ -21,7 +21,6 @@ const validateLogin = [
     handleValidationErrors
 ];
 router.post('/:reviewId/images',requireAuth, async(req,res,next)=>{
-    console.log(typeof(parseInt(req.params.reviewId)))
     let id = parseInt(req.params.reviewId)
     let review = await Review.findOne({
         where:{
@@ -92,7 +91,6 @@ router.get('/current',requireAuth, async(req,res,next)=>{
         
     })
 
-    console.log(currentReviews[0].Spot.id)
     let Reviews = []
     for(let review of currentReviews){
         let obj ={
@@ -129,7 +127,6 @@ router.get('/current',requireAuth, async(req,res,next)=>{
 })
 
 router.put('/:reviewId', requireAuth, async(req,res,next)=>{
-    console.log(typeof (parseInt(req.params.reviewId)))
     let id = parseInt(req.params.reviewId)
     let revieW = await Review.findOne({
         where: {
@@ -167,7 +164,7 @@ router.put('/:reviewId', requireAuth, async(req,res,next)=>{
     }
 })
 router.delete('/:reviewId', requireAuth, async(req,res,next)=>{
-    console.log(typeof (parseInt(req.params.reviewId)))
+    
     let id = parseInt(req.params.reviewId)
     let revieW = await Review.findOne({
         where: {

@@ -25,7 +25,8 @@ export default function CreateNewSpot() {
   const [longitude, setLongitude] = useState("");
   const [validationErrors, setValidationErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
+  const [image1, setImage1]=useState('')
+  const [image2, setImage2] = useState('')
 
   const updateCountry = (e) => setCountry(e.target.value);
   const updateAddress = (e) => setAddress(e.target.value);
@@ -77,7 +78,7 @@ export default function CreateNewSpot() {
     
 
     setValidationErrors (errors);
-  }, [country, address, city, state,description, title, price, image]);
+  }, [country, address, city, state,description, title, price,image]);
 
   const {isLoaded} = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -110,12 +111,16 @@ export default function CreateNewSpot() {
       name:title,
       description:description,
       price:price,
-      SpotImage:image
     }
-    let createdSpot = await dispatch(createSpotFunc(spot))
-    console.log(createdSpot)
-    if (createdSpot) {
-      history.push(`/spots/${createdSpot.id}`);
+    const images ={
+      preview:image,
+      others:[image1,image2]
+    }
+
+    
+    let createdSpotId  = await dispatch(createSpotFunc(spot,images))
+    if (createdSpotId) {
+      history.push(`/spots/${createdSpotId}`);
       
     }
     setCountry('')
@@ -128,13 +133,15 @@ export default function CreateNewSpot() {
     setImage('')
     setLatitude('')
     setLongitude('')
+    setImage1('')
+    setImage2('')
     setHasSubmitted(false);
   }
   if (!isLoaded) return (<div>Loading...</div>)
   return (
     <div className='top' >
  
-      <form className="top-down" onSubmit={handleSubmit}>
+      <form className="top-down" onSubmit={handleSubmit} >
         <h2>Create a new Spot</h2>
         <h3>Where's you place located?</h3>
         <p>Guests will only get your exact address once they booked a reservation</p>
@@ -326,15 +333,28 @@ export default function CreateNewSpot() {
             Competitive pricing can help your listing stand out and rank
             higher in search results.
           </p>
+          <label>Preview Photo:
           <input
             type="text"
             name="previewPhoto"
-            value={image}
             placeholder="Preview Image URL"
-            onChange={updateImage}
+            value={image}
+            onChange={(e)=>setImage(e.target.value)}
           />
+          </label>
         </label>
-        
+        <input
+          type="text"
+          value={image1}
+          name='image1'
+          onChange={(e) => setImage1(e.target.value)}
+        />
+        <input
+          type="text"
+          value={image2}
+          name='image2'
+          onChange={(e) => setImage2(e.target.value)}
+        />
         {/* <label>
           <input
             type="text"

@@ -38,7 +38,6 @@ router.post(
         let token = await setTokenCookie(res, user);
         let result = user.toJSON()
         result.token = token
-        console.log(result)
         let son = {...result}
         return res.json({
             user:son
