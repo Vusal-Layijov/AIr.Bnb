@@ -427,76 +427,96 @@ router.post('/', requireAuth, async(req,res,next)=>{
         ownerId:req.user.id,
         city, state, country, lat, lng, name, description, price
     })
+    res.statusCode=201
     res.json(spot)
 })
 
-// changes for AWSAWSAWSAWSAWS
-// router.post('/:spotId/images',requireAuth, async(req,res,next)=>{
+router.post('/:spotId/images',requireAuth, async(req,res,next)=>{
     
-//     let spot = await Spot.findByPk(req.params.spotId)
-
-//     if (!spot) {
-//         let err = new Error()
-//         err.status = 404
-//         err.message = 'Spot could not be found'
-//         next(err)
-//     }
-//     if (spot.ownerId !== req.user.id) {
-//         let err = new Error()
-//         err.status = 403
-//         err.message = 'Forbidden'
-//         next(err)
-//     }
-//    // console.log(req.user.id)
-//     else if(spot.ownerId===req.user.id){
-//         const{url,preview}=req.body
-//         let newImage = await SpotImage.create({
-//             spotId:req.params.spotId,
-//             url,
-//             preview
-//         })
-//         let data = newImage
-//         return res.json({
-//             id:data.id,
-//             url:data.url,
-//             preview:data.preview
-//         }
-//             )
-//     }
- 
-// })
-
-// new images rouste for posting
-
-router.post('/:spotId/images', requireAuth, multipleMulterUpload('images'), async(req,res,next)=>{
-    let spot = Spot.findByPk(req.params.spotId)
-    const images =await multiplePublicFileUpload(req.files)
-    console.log('--------->',req.files)
+    let spot = await Spot.findByPk(req.params.spotId)
     
-    if(!spot){
-        let err= new Error()
+    if (!spot) {
+        let err = new Error()
         err.status = 404
         err.message = 'Spot could not be found'
-    }
-    if (spot.ownerId !== req.user.id){
-        let err = new Error()
-        err.status = 403
-        err.message= 'Forbidden'
         next(err)
     }
-    else if (spot.ownerId===req.user.id){
-        for (let i=0; i<images.length; i++){
-            console.log('give me someeeee',images)
-            const newImage ={
-                url:images[i],
-                preview: i ===0 ? true : false,
-                spotId: req.params.spotId
-            }
-            await SpotImage.create(newImage)
-        }
+    if (spot.ownerId !== req.user.id) {
+        let err = new Error()
+        err.status = 403
+        err.message = 'Forbidden'
+        next(err)
     }
-    res.sendStatus(200)
+    // console.log(req.user.id)
+    else if(spot.ownerId===req.user.id){
+         const{url,preview}=req.body
+        // let newImage = await SpotImage.create({
+        //     spotId:req.params.spotId,
+        //     url,
+        //     preview
+        // })
+        // let data = newImage
+        // return res.json({
+        //     id:data.id,
+        //     url:data.url,
+        //     preview:data.preview
+        // }
+        // )
+        if(!url) res.json({message:"Please provide url", statusCode:404})
+        if(preview==true){
+            let currPreview = await SpotImage.findOne({where:{
+                'spotId':req.params.spotId,
+                preview:true
+            }})
+            if(currPreview) await currPreview.update({'preview':false})
+        }
+        let newImage = await SpotImage.create({
+            spotId:req.params.spotId,
+            url:url,
+            preview:preview
+        })
+        res.statusCode=201
+        res.json({
+            id:newImage.id,
+            url:newImage.url,
+            preview:newImage.preview
+        })
+    }
+    
 })
+
+// changes for AWSAWSAWSAWSAWS
+// new images rouste for posting
+
+// router.post('/:spotId/images', requireAuth, multipleMulterUpload('images'), async(req,res,next)=>{
+//     let spot = Spot.findByPk(req.params.spotId)
+//     const images =await multiplePublicFileUpload(req.files)
+//     console.log('--------->',req.files)
+    
+//     if(!spot){
+//         let err= new Error()
+//         err.status = 404
+//         err.message = 'Spot could not be found'
+//     }
+//     if (spot.ownerId !== req.user.id){
+//         let err = new Error()
+//         err.status = 403
+//         err.message= 'Forbidden'
+//         next(err)
+//     }
+//     else if (spot.ownerId===req.user.id){
+//         for (let i=0; i<images.length; i++){
+//             console.log('give me someeeee',images)
+//             const newImage ={
+//                 url:images[i],
+//                 preview: i ===0 ? true : false,
+//                 spotId: req.params.spotId
+//             }
+//             await SpotImage.create(newImage)
+//         }
+//     }
+//     res.sendStatus(200)
+// })
 
 
 
