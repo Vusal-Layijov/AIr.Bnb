@@ -84,8 +84,9 @@ export const createSpotFunc = (spot,images) => async dispatch =>{
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spot),
     })
-    let spot=response.json()
-    let spotId=spot.id
+    let spott= await response.json()
+    console.log('spot-------.',spott)
+    let spotId=spott.id
     await csrfFetch(`/api/spots/${spotId}/images`,{
         method:"POST",
         headers: { 'Content-Type': 'application/json' },
