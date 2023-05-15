@@ -11,6 +11,7 @@ import OpenModalButton from '../OpenModalButton';
 import ReviewModal from '../ReviewModal';
 import Map from '../Map';
 import SpotsMap from '../Map';
+import ImageGallery from './ImageGallery';
 function SetOneSPot () {
   const { spotId } = useParams()
   let user = useSelector(state =>state.session.user);
