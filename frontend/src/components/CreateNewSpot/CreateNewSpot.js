@@ -27,6 +27,7 @@ export default function CreateNewSpot() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [image1, setImage1]=useState('')
   const [image2, setImage2] = useState('')
+  const [image3,setImage3] = useState('')
 
   const updateCountry = (e) => setCountry(e.target.value);
   const updateAddress = (e) => setAddress(e.target.value);
@@ -114,7 +115,7 @@ export default function CreateNewSpot() {
     }
     const images ={
       preview:image,
-      others:[image1,image2]
+      others:[image1,image2,image3]
     }
 
     
@@ -135,6 +136,7 @@ export default function CreateNewSpot() {
     setLongitude('')
     setImage1('')
     setImage2('')
+    setImage3('')
     setHasSubmitted(false);
   }
   if (!isLoaded) return (<div>Loading...</div>)
@@ -355,6 +357,12 @@ export default function CreateNewSpot() {
           name='image2'
           onChange={(e) => setImage2(e.target.value)}
         />
+        <input
+        type='text'
+        value={image3}
+        name='image3'
+        onChange={(e) => setImage3(e.target.value)}
+         />
         {/* <label>
           <input
             type="text"
