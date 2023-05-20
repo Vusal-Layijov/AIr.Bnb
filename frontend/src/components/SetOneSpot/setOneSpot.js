@@ -65,10 +65,11 @@ function SetOneSPot () {
       <div className='mainDiv'>
        <h1>{singleSpot.name}</h1>
        <h2>{singleSpot.city}, {singleSpot.state}, {singleSpot.country}</h2>
-          <div className='mapImage' >
+          {/* <div className='mapImage' >
           <img src={singleSpot.SpotImages[0].url} style={{ width: '650px', height: '550px', marginLeft :'2px'}} ></img>
           <SpotsMap spots={spots} />
-          </div>
+          </div> */}
+          <ImageGallery images={singleSpot.SpotImages} spots={spots} />
         <div>Hosted by {singleSpot.Owner.firstName} {singleSpot.Owner.lastName} </div>
         <div className='underHost'>
           <div>{singleSpot.description}</div>
