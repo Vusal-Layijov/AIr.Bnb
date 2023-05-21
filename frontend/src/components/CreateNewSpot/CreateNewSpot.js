@@ -70,7 +70,7 @@ export default function CreateNewSpot() {
       errors.push( "Price is required");
     }
     if (image.length === 0) {
-      errors.push("Preview image is required");
+      errors.push("First image is required");
     }
     if (!address) {
       errors.push('Address is required')
@@ -329,38 +329,41 @@ export default function CreateNewSpot() {
           </div>
         </label>
        
-        <label>
+        
           <h3>Liven up your spot with photos</h3>
           <p>
             Competitive pricing can help your listing stand out and rank
             higher in search results.
           </p>
-          <label>Preview Photo:
+          
           <input
             type="text"
             name="previewPhoto"
-            placeholder="Preview Image URL"
+            placeholder="First image url"
             value={image}
             onChange={(e)=>setImage(e.target.value)}
           />
-          </label>
-        </label>
+          
+        
         <input
           type="text"
           value={image1}
           name='image1'
+          placeholder="Second image url"
           onChange={(e) => setImage1(e.target.value)}
         />
         <input
           type="text"
           value={image2}
           name='image2'
+          placeholder="Third image url"
           onChange={(e) => setImage2(e.target.value)}
         />
         <input
         type='text'
         value={image3}
         name='image3'
+        placeholder="Fourth image url"
         onChange={(e) => setImage3(e.target.value)}
          />
         {/* <label>
