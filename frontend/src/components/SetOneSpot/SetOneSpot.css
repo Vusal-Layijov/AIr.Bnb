@@ -92,3 +92,6 @@
   width: 100%;
   object-fit: cover;
 }
+#second{
+    grid-area: 1 / 1 / span 1 / 3;
+}
