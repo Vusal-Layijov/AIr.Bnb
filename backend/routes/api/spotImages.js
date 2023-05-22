@@ -15,10 +15,18 @@ const authorize= async(req,res,next) => {
     spotImg=spotImg.toJSON()
     let spot = await Spot.findByPk(spotImg.spotId)
     spot = spot.toJSON()
-    if(spot.ownerID==req.user.id) return next()
+    if(spot.ownerId==req.user.id) return next()
     return res.json({
         message:'Forbidden',
         statusCode:403
+    })
+}
+const checkSpotImage = async(req,res,next) => {
+    const spotImg = await SpotImage.findByPk(req.params.imageId)
+    if(spotImg) return next()
+    res.statusCode = 404
+    res.json({
+        message:"Spot Image could not be found"
     })
 }
 
@@ -44,5 +52,10 @@ router.delete('/:imageId',requireAuth, async(req,res,next) =>{
         })
     }
 })
-
+router.put('/:imageId', requireAuth, checkSpotImage, authorize, async(req,res,next) => {
+    const spotImg = await SpotImage.findByPk(req.params.imageId)
+    spotImg.url = req.body.url
+    await spotImg.save()
+    res.json(spotImg)
+})
 module.exports=router
