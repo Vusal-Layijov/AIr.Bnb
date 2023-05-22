@@ -10,6 +10,17 @@ const { where, Model } = require('sequelize');
 const { requireAuth } = require('../../utils/auth.js');
 const router = express.Router();
 
+const authorize= async(req,res,next) => {
+    let spotImg = await SpotImage.findByPk(req.params.imageId, {attributes:['spotId']})
+    spotImg=spotImg.toJSON()
+    let spot = await Spot.findByPk(spotImg.spotId)
+    spot = spot.toJSON()
+    if(spot.ownerID==req.user.id) return next()
+    return res.json({
+        message:'Forbidden',
+        statusCode:403
+    })
+}
 
 router.delete('/:imageId',requireAuth, async(req,res,next) =>{
     let image = await SpotImage.findByPk(req.params.imageId)
