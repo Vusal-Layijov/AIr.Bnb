@@ -54,12 +54,7 @@ export default function CreateNewSpot() {
     if (state.length === 0) {
       errors.push( "State is required");
     }
-    // if (latitude.length === 0) {
-    //   errors.push("Latitude is required");
-    // }
-    // if (longitude.length === 0) {
-    //   errors.push("Longitude is required");
-    // }
+
     if (description.length < 30) {
       errors.push("Description needs a minimum of 30 characters");
     }
