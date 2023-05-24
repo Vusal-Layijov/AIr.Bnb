@@ -325,12 +325,7 @@ export default function CreateNewSpot() {
         </label>
        
         
-          <h3>Liven up your spot with photos</h3>
-          <p>
-            Competitive pricing can help your listing stand out and rank
-            higher in search results.
-          </p>
-          
+          <h3>Liven up your spot with photos</h3>          
           <input
             type="text"
             name="previewPhoto"
