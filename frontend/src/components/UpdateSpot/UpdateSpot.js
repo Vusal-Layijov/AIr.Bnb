@@ -42,6 +42,9 @@ export default function UpdateSpot() {
             setTitle(spotInfo.name)
             setPrice(spotInfo.price)
             setImage(spotInfo.SpotImages[0].url)
+            setImage1(spotInfo.SpotImages[1]?.url)
+            setImage2(spotInfo.SpotImages[2]?.url)
+            setImage3(spotInfo.SpotImages[3]?.url)
         }
         stateAdd()
     }, [dispatch]);
@@ -67,6 +70,10 @@ export default function UpdateSpot() {
     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
     
+    const [image1, setImage1] = useState('')
+    const [image2, setImage2] = useState('')
+    const [image3, setImage3] = useState('')
+
     const [validationErrors, setValidationErrors] = useState([]);
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -343,6 +350,37 @@ export default function UpdateSpot() {
                       </div>
                   </div>
               </label>
+              <h3>Liven up your spot with photos</h3>
+              <input
+                  type="text"
+                  name="previewPhoto"
+                  placeholder="First image url"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+              />
+
+
+              <input
+                  type="text"
+                  value={image1}
+                  name='image1'
+                  placeholder="Second image url"
+                  onChange={(e) => setImage1(e.target.value)}
+              />
+              <input
+                  type="text"
+                  value={image2}
+                  name='image2'
+                  placeholder="Third image url"
+                  onChange={(e) => setImage2(e.target.value)}
+              />
+              <input
+                  type='text'
+                  value={image3}
+                  name='image3'
+                  placeholder="Fourth image url"
+                  onChange={(e) => setImage3(e.target.value)}
+                />
 
               {/* <label>
                   <h3>Liven up your spot with photos</h3>
