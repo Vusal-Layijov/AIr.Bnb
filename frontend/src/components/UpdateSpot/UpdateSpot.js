@@ -163,8 +163,12 @@ export default function UpdateSpot() {
             price: price,
             SpotImage: image
         }
-       
-       let updatedSpot = await dispatch(updateSpotFunc(spotId, spot))
+       const images = []
+       if(image) images.push(image)
+        if (image1) images.push(image1)
+        if (image2) images.push(image2)
+        if (image3) images.push(image3)
+       let updatedSpot = await dispatch(updateSpotFunc(spotId, spot,images))
         
         if (updatedSpot) {
             history.push(`/spots/${updatedSpot.id}`);
