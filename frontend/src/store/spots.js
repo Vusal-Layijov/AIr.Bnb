@@ -179,8 +179,8 @@ export const removeSpotFunc = (spotId) => async dispatch => {
 //     }
 // }
 
-export const updateSpotFunc = (spotId, spot) => async dispatch => {
-    // console.log('consoling undefined', spotId)
+export const updateSpotFunc = (spotId, spot,images) => async dispatch => {
+    console.log('consoling images', images)
     // console.log('consoling undefined spot', spot.price)
     const response = await csrfFetch(`/api/spots/${spotId}`, {
        
@@ -190,7 +190,6 @@ export const updateSpotFunc = (spotId, spot) => async dispatch => {
     })
     if (response.ok) {
         const updatedSpot = await response.json()
-        console.log('consoluing updated already',updatedSpot)
         const toStore = await dispatch(setOneSpotDetails(updatedSpot.id))
         dispatch(updateSpot(toStore))
         return toStore
