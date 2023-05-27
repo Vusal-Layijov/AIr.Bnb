@@ -15,7 +15,8 @@ export default function UpdateSpot() {
     const dispatch = useDispatch();
     const history = useHistory();
     const spot = useSelector(state => state.spots.allSpots[spotId])
-
+    const singleSpot=useSelector(state => state.spots.singleSpot)
+    const spotImages = singleSpot.SpotImages
     let user;
     user = useSelector((state) => state.session.user);
    //  if (!user) history.push(`/`);
