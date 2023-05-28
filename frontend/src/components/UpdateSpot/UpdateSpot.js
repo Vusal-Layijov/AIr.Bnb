@@ -54,7 +54,7 @@ export default function UpdateSpot() {
     //     dispatch(setCurrentUserSpotsFunc())
     // }, [dispatch])
       let isOwner = true
-      if(Object.keys(obj).length >0 && obj.ownerId !== user.id) isOwner = false
+      if(Object.keys(obj).length >0 && obj.ownerId !== user?.id) isOwner = false
       if(isOwner === false) history.push('/')
 
 
