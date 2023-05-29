@@ -162,20 +162,21 @@ export default function UpdateSpot() {
         setLongitude(() => latlng.lng)
     }
     const handleImageChange = e => {
+       
         const newImages = {...images}
         if(newImages[e.target.name]){
             newImages[e.target.name]={
                 ...newImages[e.target.name],
-                curr:e.target.value
+                curr: e.target.value
             }
         }else{
             newImages[e.target.name] = {
-                og:null,
+                og: null,
                 curr: e.target.value,
-                id:null
+                id: null
             }
         }
-        setImages(newImages)
+        setImages(()=>newImages)
     }
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -386,28 +387,28 @@ export default function UpdateSpot() {
                   type="text"
                   name="previewImage"
                   placeholder="First image url"
-                  value={image}
+                value={images.previewImage?.curr}
                   onChange={handleImageChange}
               />
               <label>Other Images</label>
 
               <input
                   type="text"
-                  value={image1}
+                  value={images.image1?.curr}
                   name='image1'
                   placeholder="Second image url"
                   onChange={handleImageChange}
               />
               <input
                   type="text"
-                  value={image2}
+                  value={images.image2?.curr}
                   name='image2'
                   placeholder="Third image url"
                   onChange={handleImageChange}
               />
               <input
                   type='text'
-                  value={image3}
+                  value={images.image3?.curr}
                   name='image3'
                   placeholder="Fourth image url"
                   onChange={handleImageChange}
