@@ -9,6 +9,7 @@ import PlacesAutocomplete, {
     geocodeByPlaceId,
     getLatLng,
 } from 'react-places-autocomplete';
+import { emptySubmitObject } from '../../utils/mainutils';
 const libraries = ['places']
 export default function UpdateSpot() {
     const {spotId} = useParams()
@@ -27,7 +28,9 @@ export default function UpdateSpot() {
     obj = useSelector((state) => {
         return state.spots.singleSpot;
     });
-
+    const [submitted, setSubmitted] = useState(false)
+    const [spotObject,setSpotObject] = useState(emptySubmitObject)
+    const [images,setImages]=useState({})
 
     useEffect(() => {
         const stateAdd = async () => {
@@ -46,6 +49,17 @@ export default function UpdateSpot() {
             setImage1(spotInfo.SpotImages[1]?.url)
             setImage2(spotInfo.SpotImages[2]?.url)
             setImage3(spotInfo.SpotImages[3]?.url)
+            let index=1
+            let newImages = {}
+            spotInfo.SpotImages.map(img =>{
+                if(img.preview===true){
+                    newImages.previewImage = {og:img.url,curr:img.url,id:img.id}
+                }else{
+                    newImages[`image${index}`]={og:img.url,curr:img.url,id:img.id}
+                    index++
+                }
+            })
+            setImages(()=>newImages)
         }
         stateAdd()
     }, [dispatch]);
@@ -147,7 +161,22 @@ export default function UpdateSpot() {
         setLatitude(() => latlng.lat)
         setLongitude(() => latlng.lng)
     }
-  
+    const handleImageChange = e => {
+        const newImages = {...images}
+        if(newImages[e.target.name]){
+            newImages[e.target.name]={
+                ...newImages[e.target.name],
+                curr:e.target.value
+            }
+        }else{
+            newImages[e.target.name] = {
+                og:null,
+                curr: e.target.value,
+                id:null
+            }
+        }
+        setImages(newImages)
+    }
     const handleSubmit = async (e) => {
         e.preventDefault()
         setHasSubmitted(true);
@@ -164,11 +193,7 @@ export default function UpdateSpot() {
             price: price,
             SpotImage: image
         }
-       const images = []
-       if(image) images.push(image)
-        if (image1) images.push(image1)
-        if (image2) images.push(image2)
-        if (image3) images.push(image3)
+     
        let updatedSpot = await dispatch(updateSpotFunc(spotId, spot,images))
         
         if (updatedSpot) {
@@ -355,36 +380,37 @@ export default function UpdateSpot() {
                       </div>
                   </div>
               </label>
-              <h3>Liven up your spot with photos</h3>
+              <h3>Update photos</h3>
+              <label>Preview Image</label>
               <input
                   type="text"
-                  name="previewPhoto"
+                  name="previewImage"
                   placeholder="First image url"
                   value={image}
-                  onChange={(e) => setImage(e.target.value)}
+                  onChange={handleImageChange}
               />
-
+              <label>Other Images</label>
 
               <input
                   type="text"
                   value={image1}
                   name='image1'
                   placeholder="Second image url"
-                  onChange={(e) => setImage1(e.target.value)}
+                  onChange={handleImageChange}
               />
               <input
                   type="text"
                   value={image2}
                   name='image2'
                   placeholder="Third image url"
-                  onChange={(e) => setImage2(e.target.value)}
+                  onChange={handleImageChange}
               />
               <input
                   type='text'
                   value={image3}
                   name='image3'
                   placeholder="Fourth image url"
-                  onChange={(e) => setImage3(e.target.value)}
+                  onChange={handleImageChange}
                 />
 
               {/* <label>
