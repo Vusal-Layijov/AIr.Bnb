@@ -188,7 +188,23 @@ export const updateSpotFunc = (spotId, spot,images) => async dispatch => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(spot),
     })
+    Object.values(images).forEach(async el => {
+        if (el.id && el.curr && el.curr !== el.og  ){
+            await csrfFetch(`/api/spot-images/${el.id}`, {
+                method:'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({url: el.curr})
+            })
+        }else if (!el.id && el.curr){
+            await csrfFetch (`/api/spots/${spotId}/images`,{
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({url:el.curr})
+            })
+        }
+    })
     if (response.ok) {
+
         const updatedSpot = await response.json()
         const toStore = await dispatch(setOneSpotDetails(updatedSpot.id))
         dispatch(updateSpot(toStore))

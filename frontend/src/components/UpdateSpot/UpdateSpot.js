@@ -45,7 +45,7 @@ export default function UpdateSpot() {
             setDescription(spotInfo.description)
             setTitle(spotInfo.name)
             setPrice(spotInfo.price)
-            setImage(spotInfo.SpotImages[0].url)
+            setImage(spotInfo.SpotImages[0]?.url)
             setImage1(spotInfo.SpotImages[1]?.url)
             setImage2(spotInfo.SpotImages[2]?.url)
             setImage3(spotInfo.SpotImages[3]?.url)
@@ -136,14 +136,14 @@ export default function UpdateSpot() {
         if (price.length === 0) {
             errors.push("Price is required");
         }
-        if (image.length === 0) {
+        if (images.previewImage?.curr.length === 0) {
             errors.push("Preview image is required");
         }
 
 
 
         setValidationErrors(errors);
-    }, [country, address, city, state, description, title, price, image]);
+    }, [country, address, city, state, description, title, price, images]);
 
     const {isLoaded} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
