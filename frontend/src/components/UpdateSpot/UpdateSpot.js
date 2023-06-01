@@ -11,6 +11,19 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import { emptySubmitObject } from '../../utils/mainutils';
 const libraries = ['places']
+function checkFormat(obj) {
+    let values = Object.values(obj);
+    const picFormats = ['png', 'jpg', 'jpeg'];
+
+    for (let url of values) {
+        let urlSplit = url['curr'].split('.')
+        if (urlSplit.length > 1 && picFormats.includes(urlSplit[urlSplit.length - 1])) {
+            return true
+        }
+    }
+
+    return false;
+}
 export default function UpdateSpot() {
     const {spotId} = useParams()
     const dispatch = useDispatch();
@@ -99,7 +112,7 @@ export default function UpdateSpot() {
     const updateTitle = (e) => setTitle(e.target.value);
     const updateDescription = (e) => setDescription(e.target.value);
     const updatePrice = (e) => setPrice(e.target.value);
-    const updateImage = (e) => setImage(e.target.value)
+    
 
     // if (!Object.entries(obj).length > 0){
     //     return null
@@ -194,7 +207,7 @@ export default function UpdateSpot() {
             price: price,
             SpotImage: image
         }
-     
+        console.log('consoling images sssss', images)
        let updatedSpot = await dispatch(updateSpotFunc(spotId, spot,images))
         
         if (updatedSpot) {

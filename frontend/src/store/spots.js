@@ -180,8 +180,6 @@ export const removeSpotFunc = (spotId) => async dispatch => {
 // }
 
 export const updateSpotFunc = (spotId, spot,images) => async dispatch => {
-    console.log('consoling images', images)
-    // console.log('consoling undefined spot', spot.price)
     const response = await csrfFetch(`/api/spots/${spotId}`, {
        
         method: 'PUT',
@@ -200,6 +198,11 @@ export const updateSpotFunc = (spotId, spot,images) => async dispatch => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({url:el.curr})
+            })
+        }else if (el.id && !el.curr){
+            await csrfFetch(`/api/spot-images/${el.id}`,{
+                method:'DELETE',
+                headers: { 'Content-Type': 'application/json' },
             })
         }
     })
