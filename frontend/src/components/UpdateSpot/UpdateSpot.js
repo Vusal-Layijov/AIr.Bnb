@@ -16,13 +16,16 @@ function checkFormat(obj) {
     const picFormats = ['png', 'jpg', 'jpeg'];
 
     for (let url of values) {
-        let urlSplit = url['curr'].split('.')
-        if (urlSplit.length > 1 && picFormats.includes(urlSplit[urlSplit.length - 1])) {
-            return true
+        if(url['curr'].length>0){
+
+            let urlSplit = url['curr'].split('.')
+            if (!(urlSplit.length >=1 && picFormats.includes(urlSplit[urlSplit.length - 1]))) {
+                return false
+            }
         }
     }
 
-    return false;
+    return true;
 }
 export default function UpdateSpot() {
     const {spotId} = useParams()
@@ -152,7 +155,9 @@ export default function UpdateSpot() {
         if (images.previewImage?.curr.length === 0) {
             errors.push("Preview image is required");
         }
-
+        if (!checkFormat(images)){
+            errors.push('Image must be on png, jpeg or jpg format')
+        }
 
 
         setValidationErrors(errors);
