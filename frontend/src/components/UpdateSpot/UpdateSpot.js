@@ -9,7 +9,6 @@ import PlacesAutocomplete, {
     geocodeByPlaceId,
     getLatLng,
 } from 'react-places-autocomplete';
-import { emptySubmitObject } from '../../utils/mainutils';
 const libraries = ['places']
 function checkFormat(obj) {
     let values = Object.values(obj);
@@ -36,7 +35,7 @@ export default function UpdateSpot() {
     const spotImages = singleSpot.SpotImages
     let user;
     user = useSelector((state) => state.session.user);
-   //  if (!user) history.push(`/`);
+
 
 
     let obj = {}
@@ -44,8 +43,6 @@ export default function UpdateSpot() {
     obj = useSelector((state) => {
         return state.spots.singleSpot;
     });
-    const [submitted, setSubmitted] = useState(false)
-    const [spotObject,setSpotObject] = useState(emptySubmitObject)
     const [images,setImages]=useState({})
 
     useEffect(() => {
@@ -431,59 +428,6 @@ export default function UpdateSpot() {
                   placeholder="Fourth image url"
                   onChange={handleImageChange}
                 />
-
-              {/* <label>
-                  <h3>Liven up your spot with photos</h3>
-                  <p>
-                      Competitive pricing can help your listing stand out and rank
-                      higher in search results.
-                  </p>
-                  <input
-                      type="text"
-                      name="previewPhoto"
-                      value={image}
-                      placeholder="Preview Image URL"
-                      onChange={updateImage}
-                  />
-              </label>
-
-              <label>
-                  <input
-                      type="text"
-                      name="photo1"
-                      value=''
-                      placeholder="Image URL"
-                      onChange={(e) => alert('This future is coming, you can add preview image for now!!')}
-                  />
-              </label>
-              <label>
-                  <input
-                      type="text"
-                      name="photo2"
-                      value=''
-                      placeholder="Image URL"
-                      onChange={(e) => alert('This future is coming, you can add preview image for now!!')}
-                  />
-              </label>
-              <label>
-                  <input
-                      type="text"
-                      name="photo3"
-                      value=''
-                      placeholder="Image URL"
-                      onChange={(e) => alert('This future is coming, you can add preview image for now!!')}
-                  />
-              </label>
-              <label>
-                  <input
-                      type="text"
-                      name="photo4"
-                      value=''
-                      placeholder="Image URL"
-                      onChange={(e) => alert('This future is coming, you can add preview image for now!!')}
-                  />
-              </label>
-              <br /> */}
               <div className='got2'>
                   <button className="subButton" type="submit">
                       Update Spot
