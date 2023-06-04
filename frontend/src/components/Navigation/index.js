@@ -16,6 +16,9 @@ function Navigation({ isLoaded }) {
                 <div style={{marginLeft:'50px'}}>
                     <NavLink style={{ marginLeft: '50px', }} exact to="/"><Image /></NavLink>
                 </div>
+                <div className='inputDiv'>
+                <input className='forInput' ></input><i class="fas fa-search"></i>
+                </div>
                 {isLoaded && (
                     <div className='navStyle'>
                         <div> {sessionUser && <NavLink to={'/spots/new'} style={{ textDecoration: 'none', }} ><h4 style={{ fontStyle: 'italic', marginTop: '5px', marginRight: '10px' }}>Create a New Spot</h4> </NavLink>

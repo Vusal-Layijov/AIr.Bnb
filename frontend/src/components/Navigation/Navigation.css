@@ -81,3 +81,14 @@ display: flex;
     color: white;
     background-color: rgb(186, 184, 184);
 }
+.forInput {
+    
+}
+.inputDiv{
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+}
