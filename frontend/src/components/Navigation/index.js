@@ -10,6 +10,7 @@ import { Route } from 'react-router-dom';
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const [openForm, setOpenForm] = useState(false)
+    const [query, setQuery] = useState('')
     return (
         
             <div className='headerStyle'>
@@ -17,7 +18,12 @@ function Navigation({ isLoaded }) {
                     <NavLink style={{ marginLeft: '50px', }} exact to="/"><Image /></NavLink>
                 </div>
                 <div className='inputDiv'>
-                <input className='forInput' ></input><i class="fas fa-search"></i>
+                <input 
+                  className='forInput'
+                  type='text'
+                  placeholder='Search...'
+                  onChange={e=>setQuery(e.target.value)}
+                  /><i class="fas fa-search"></i>
                 </div>
                 {isLoaded && (
                     <div className='navStyle'>

@@ -297,13 +297,29 @@ router.get('/', async(req,res,next)=>{
     }
 
 
-  //  console.log(data)
+  // for query
+  const {q} = req.query
+  const keys= ['city','state','country']
+  const search = (data) => {
+    return data.filter((item) =>
+    keys.some((key) =>item[key].toLowerCase().includes(q.toLowerCase()))
+    )
+  }
+  if(q){
+      res.json({
+          Spots: search(result),
+          page,
+          size
+      })
+  }else{
+
+      res.json({
+          Spots:result,
+          page,
+          size
+      })
+  }
     
-    res.json({
-        Spots:result,
-        page,
-        size
-    })
 } )
 
 
