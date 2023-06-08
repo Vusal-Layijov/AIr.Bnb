@@ -21,9 +21,9 @@ function Navigation({ isLoaded }) {
                 <input 
                   className='forInput'
                   type='text'
-                  placeholder='Search...'
+                  placeholder='Where...'
                   onChange={e=>setQuery(e.target.value)}
-                  /><i class="fas fa-search"></i>
+                  /><i class="fas fa-search" ></i>
                 </div>
                 {isLoaded && (
                     <div className='navStyle'>
