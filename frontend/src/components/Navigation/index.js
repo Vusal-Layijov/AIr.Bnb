@@ -6,11 +6,12 @@ import './Navigation.css';
 import Image from '../../Image/Image';
 import CreateNewSpot from '../CreateNewSpot/CreateNewSpot';
 import { Route } from 'react-router-dom';
+import { useSearchParams } from '../../context/search';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const [openForm, setOpenForm] = useState(false)
-    const [query, setQuery] = useState('')
+    const {searchParams,setSearchParams}=useSearchParams()
     return (
         
             <div className='headerStyle'>
@@ -22,7 +23,7 @@ function Navigation({ isLoaded }) {
                   className='forInput'
                   type='text'
                   placeholder='Where...'
-                  onChange={e=>setQuery(e.target.value)}
+                  onChange={e=>setSearchParams(e.target.value)}
                   /><i class="fas fa-search" ></i>
                 </div>
                 {isLoaded && (
