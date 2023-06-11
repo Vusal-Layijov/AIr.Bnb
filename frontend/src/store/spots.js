@@ -68,6 +68,13 @@ export const setAllSpots = () => async dispatch =>{
     dispatch(setSpots(data))
     return response
 }
+export const setSpotsWithQuery = (q) => async dispatch => {
+    const response = await csrfFetch(`/api/spots?q=${q}`)
+    const data = await response.json()
+    dispatch(setSpots(data))
+    return response
+
+}
 
 export const setCurrentUserSpotsFunc = () => async dispatch =>{
     const response = await csrfFetch('/api/spots/current')

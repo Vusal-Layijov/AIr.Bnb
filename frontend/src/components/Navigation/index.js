@@ -7,11 +7,12 @@ import Image from '../../Image/Image';
 import CreateNewSpot from '../CreateNewSpot/CreateNewSpot';
 import { Route } from 'react-router-dom';
 import { useSearchParams } from '../../context/search';
+import { setSpotsWithQuery } from '../../store/spots';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const [openForm, setOpenForm] = useState(false)
-    const {searchParams,setSearchParams}=useSearchParams()
+    const {searchParams,setSearchParams}=useSearchParams('')
     return (
         
             <div className='headerStyle'>
