@@ -324,7 +324,7 @@ router.get('/', async(req,res,next)=>{
 
 
 router.get('/current',requireAuth, async(req,res)=>{
-   // console.log(req.user.id)
+   
    // let userSpots = await User.findByPk(req.user.id
     //     {
     //     include:{
