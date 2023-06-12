@@ -12,6 +12,7 @@ import CreateBooking from "./components/CreateBookings";
 import NotFound from "./components/PageNotFound";
 import Footer from "./components/Footer";
 import AboutAirWe from "./components/AboutAirWe";
+import FilterSpots from "./components/FilterSpots";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -36,6 +37,9 @@ function App() {
      
       < Navigation isLoaded={isLoaded} />
         <Switch>
+          <Route exact path={'/?q'}>
+            <FilterSpots />
+          </Route>
           <Route exact path={'/'}>
             <AllSpotsDetails />
           </Route>

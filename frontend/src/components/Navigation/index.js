@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -8,11 +8,20 @@ import CreateNewSpot from '../CreateNewSpot/CreateNewSpot';
 import { Route } from 'react-router-dom';
 import { useSearchParams } from '../../context/search';
 import { setSpotsWithQuery } from '../../store/spots';
+import { useHistory } from 'react-router-dom';
+//import { search } from '../../../../backend/routes/api/spots';
 
 function Navigation({ isLoaded }) {
+    const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const [openForm, setOpenForm] = useState(false)
     const {searchParams,setSearchParams}=useSearchParams('')
+    const search = () =>{
+        history.push(`/?q=${searchParams}`)
+    }
+    function handleKeyPress (e){
+        if(e.key==='Enter') search()
+    }
     return (
         
             <div className='headerStyle'>
@@ -25,7 +34,8 @@ function Navigation({ isLoaded }) {
                   type='text'
                   placeholder='Where...'
                   onChange={e=>setSearchParams(e.target.value)}
-                  /><i class="fas fa-search" ></i>
+                  onKeyPress={handleKeyPress}
+                  /><i onClick={search} class="fas fa-search" ></i>
                 </div>
                 {isLoaded && (
                     <div className='navStyle'>
