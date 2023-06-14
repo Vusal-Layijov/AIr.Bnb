@@ -1,5 +1,5 @@
 export default function FilterSpots(){
     return(
-        <h1>hiiiiiii</h1>
+        <h1>Search features are coming</h1>
     )
 }

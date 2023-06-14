@@ -37,13 +37,13 @@ function App() {
      
       < Navigation isLoaded={isLoaded} />
         <Switch>
-          <Route exact path={'/?q'}>
-            <FilterSpots />
-          </Route>
           <Route exact path={'/'}>
             <AllSpotsDetails />
           </Route>
-          <Route exact path={'/spots/new'}>
+          <Route exact path={'/spots'}>
+            <FilterSpots />
+          </Route>
+          <Route  path={'/spots/new'}>
            <CreateNewSpot />
           </Route>
           <Route path={'/users/current'}>
