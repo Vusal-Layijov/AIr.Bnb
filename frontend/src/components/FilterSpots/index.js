@@ -5,6 +5,7 @@ import { useSearchParams } from "../../context/search"
 import './index.css'
 import SpotsMap from "../Map"
 
+
 export default function FilterSpots(){
     const { searchParams, setSearchParams } = useSearchParams('')
     
@@ -14,7 +15,7 @@ export default function FilterSpots(){
 
             </section>
             <section id="business_map" >
-            
+
             </section>
         </div>
     )
