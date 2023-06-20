@@ -4,7 +4,7 @@ import { NavLink, useParams } from "react-router-dom"
 import { useSearchParams } from "../../context/search"
 import './index.css'
 import SpotsMap from "../Map"
-
+import setFilteredSpots from "./FilteredSpots"
 
 export default function FilterSpots(){
     const { searchParams, setSearchParams } = useSearchParams('')
@@ -12,7 +12,7 @@ export default function FilterSpots(){
     return(
         <div id="business_ccontainer" >
             <section id="business_gallery" >
-
+                
             </section>
             <section id="business_map" >
 
