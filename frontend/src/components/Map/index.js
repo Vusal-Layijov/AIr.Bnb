@@ -13,7 +13,6 @@ import { useHistory, useParams } from "react-router-dom";
 const libraries = ['places', 'geometry', 'marker']
 
 function Map({spots}){
-    console.log('map-------------->',spots)
     const history = useHistory()
     const [address, setAddress] = useState('')
     const [coordinates, setCoordinates] = useState({lat:null, lng:null})

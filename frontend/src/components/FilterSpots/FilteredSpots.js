@@ -1,5 +1,5 @@
 import { setSpotsWithQuery } from "../../store/spots"
 
-export default function setFilteredSpots(){
+export default function SetFilteredSpots(){
 
 }
