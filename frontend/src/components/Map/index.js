@@ -210,7 +210,8 @@ function initMap(spots, spotId) {
 //     return <div id="map" className="map"></div>;
 // }
 function SpotsMap({ spots }) {
-    const {spotId} = useParams()
+    const {spotId} = useParams() 
+    // let spotId = 3
   
   useEffect(() => {
     // Check if Google Maps API has already been loaded
