@@ -8,14 +8,13 @@ import SpotsMap from '../Map';
 export default function AllSpotsDetails() {
     const dispatch = useDispatch()
     const spots = useSelector(state =>Object.values(state.spots.allSpots))
-    //console.log(spots[0].previewImage)
+ 
     useEffect(() =>{
         dispatch(setAllSpots())
     },[dispatch])
     if(!spots) {
         return null
     }
-    //style={{backgroundImage: `url('${spots[0].previewImage}')`}}
   return (
    
     

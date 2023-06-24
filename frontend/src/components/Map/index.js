@@ -13,7 +13,6 @@ import { useHistory, useParams } from "react-router-dom";
 const libraries = ['places', 'geometry', 'marker']
 
 function Map({spots}){
-    console.log('map-------------->',spots)
     const history = useHistory()
     const [address, setAddress] = useState('')
     const [coordinates, setCoordinates] = useState({lat:null, lng:null})
@@ -211,7 +210,8 @@ function initMap(spots, spotId) {
 //     return <div id="map" className="map"></div>;
 // }
 function SpotsMap({ spots }) {
-    const {spotId} = useParams()
+    const {spotId} = useParams() 
+    // let spotId = 3
   
   useEffect(() => {
     // Check if Google Maps API has already been loaded
