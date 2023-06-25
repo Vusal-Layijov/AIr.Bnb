@@ -40,7 +40,7 @@ function App() {
           <Route exact path={'/'}>
             <AllSpotsDetails />
           </Route>
-          <Route exact path={'/spots'}>
+          <Route exact path={'/filteredspots'}>
             <FilterSpots />
           </Route>
           <Route  path={'/spots/new'}>
