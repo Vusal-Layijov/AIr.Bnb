@@ -17,7 +17,8 @@ function Navigation({ isLoaded }) {
     const [openForm, setOpenForm] = useState(false)
     const {searchParams,setSearchParams}=useSearchParams('')
     const search = () =>{
-        history.push(`/spots/?q=${searchParams}`)
+        history.push(`/filteredspots/?q=${searchParams}`)
+        setSearchParams('')
     }
     function handleKeyPress (e){
         if(e.key==='Enter') search()
