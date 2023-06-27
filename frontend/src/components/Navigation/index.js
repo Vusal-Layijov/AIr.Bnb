@@ -18,7 +18,7 @@ function Navigation({ isLoaded }) {
     const {searchParams,setSearchParams}=useSearchParams('')
     const search = () =>{
         history.push(`/filteredspots/?q=${searchParams}`)
-        setSearchParams('')
+        //setSearchParams('')
     }
     function handleKeyPress (e){
         if(e.key==='Enter') search()
@@ -34,6 +34,7 @@ function Navigation({ isLoaded }) {
                   className='forInput'
                   type='text'
                   placeholder='Where...'
+                  value={searchParams}
                   onChange={e=>setSearchParams(e.target.value)}
                   onKeyPress={handleKeyPress}
                   /><i onClick={search} class="fas fa-search" ></i>

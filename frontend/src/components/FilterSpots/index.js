@@ -11,7 +11,6 @@ export default function FilterSpots(){
     const { searchParams, setSearchParams } = useSearchParams('')
     const dispatch = useDispatch()
     const spots = useSelector(state => Object.values(state.spots.allSpots))
-    console.log('-----!!!>search paramsssss',searchParams)
     useEffect(() => {
         const timer = setTimeout(() => {
             
