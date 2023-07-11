@@ -6,7 +6,6 @@ import reviewReducer from "./review";
 import bookingReducer from "./bookings";
 
 const rootReducer = combineReducers({
-  // add reducer functions here
   session: sessionReducer,
   spots: spotsReducer,
   reviews: reviewReducer,
