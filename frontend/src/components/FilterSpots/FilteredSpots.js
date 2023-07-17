@@ -1,10 +1,11 @@
 import { setSpotsWithQuery } from "../../store/spots"
 import { NavLink } from "react-router-dom"
+import './index.css'
 export default function SetFilteredSpots({spots}){
     return (
 
 
-        <div className='forFirst'>
+        <div className='forFirst2'>
             {spots.map((spot) => {
                 return (
                     <nav key={spot.id} className='forNew'>
