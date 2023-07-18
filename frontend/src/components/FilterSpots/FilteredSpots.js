@@ -8,7 +8,7 @@ export default function SetFilteredSpots({spots}){
         <div className='forFirst2'>
             {spots.map((spot) => {
                 return (
-                    <nav key={spot.id} className='forNew'>
+                    <nav key={spot.id} className='forNew2'>
                         <NavLink style={{ textDecoration: 'none' }} className='fornav' to={`/spots/${spot.id}`}>
                             <div >
                                 <div className='spotclass' >
