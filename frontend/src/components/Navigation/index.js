@@ -37,7 +37,7 @@ function Navigation({ isLoaded }) {
                   value={searchParams}
                   onChange={e=>setSearchParams(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  /><i onClick={search} class="fas fa-search" ></i>
+                  /><i onClick={search} className="fas fa-search search-icon" ></i>
                 </div>
                 {isLoaded && (
                     <div className='navStyle'>
