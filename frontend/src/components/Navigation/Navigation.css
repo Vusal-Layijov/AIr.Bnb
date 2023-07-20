@@ -84,9 +84,10 @@ display: flex;
 .forInput {
     padding-right: 30px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
     padding: 5px 7px;
     font-size: 16px;
+    height: 25px;
 
     
 }
@@ -100,11 +101,26 @@ display: flex;
     margin-top: 15px;
     position: relative;
 }
-.search-icon{
-    position: absolute;
+ .search-icon{
+    /* position: absolute;
     top: 50%;
     color: red;
     right: 0;
-    transform: translateY(-100%);
+    transform: translateY(-100%); */
+    color: white;
     cursor: pointer;
+    margin-left: 6px;
+    margin-top: 5px;
+} 
+.searchDiv{
+    width: 25px;
+    height: 25px;
+    position: absolute;
+        top: 50%;
+        color: red;
+        right: 0;
+        transform: translateY(-65%);
+        border: 1px solid red;
+        border-radius: 50%;
+        background-color: red;
 }
