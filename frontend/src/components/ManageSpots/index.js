@@ -16,7 +16,6 @@ export default function ManageSpots() {
     const spots = useSelector(state => Object.values(state.spots.allSpots))
 
     const bookings = useSelector(state => Object.values(state.bookings.user))
-    console.log(bookings)
 
     useEffect(() =>{
         dispatch(setCurrentUserSpotsFunc())
@@ -25,8 +24,7 @@ export default function ManageSpots() {
     if (!spots || !bookings) {
         return null
     }
-   // <button onClick={() => dispatch(removeSpotFunc(spot.id))} >Delete</button>
-   // console.log('current user spots', spots)
+
   return (
     <>
     <div className='basGot'>
