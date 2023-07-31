@@ -72,10 +72,7 @@ export default function ManageSpots() {
                           <div className='spotClass' >
                               <img src={booking.Spot.previewImage} className='forImage'></img>
                           </div>
-                          {/* <div className="forbook" >
-                              <NavLink to={`/bookings/${booking.id}/edit`} > <button className="globalmodal" >Update</button> </NavLink>
-
-                          </div> */}
+                         
                       </div>
 
                   )
