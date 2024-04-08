@@ -20,7 +20,7 @@ module.exports = {
    return queryInterface.bulkInsert(options,[
      {
        spotId: 1,
-       url: 'https://www.stuffmirror.com/wp-content/uploads/2018/12/Sophisticated-Style-Rustic-Mountain-Home-in-Tahoe-1.jpg',
+       url: 'https://wallpaperaccess.com/full/2315968.jpg',
        preview: true
      },
      {
