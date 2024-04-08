@@ -28,6 +28,7 @@
     "concurrently": "^8.0.1",
     "markerwithlabel": "^2.0.2",
     "react-datepicker": "^4.11.0",
-    "react-map-gl": "^7.0.23"
+    "react-map-gl": "^7.0.23",
+    "sqlite3": "^5.1.7"
   }
 }
