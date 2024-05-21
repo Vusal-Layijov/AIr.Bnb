@@ -428,7 +428,6 @@ router.get('/:spotId', async(req,res,next)=>{
         firstName:spotOwner.firstName,
         lastName:spotOwner.lastName
     }
-    console.log(Owner.id)
     
     //console.log(numreview)
     res.json({...sendData, Owner,SpotImages})

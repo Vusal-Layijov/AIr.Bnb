@@ -9,8 +9,7 @@ import './SetOneSpot.css'
 import { setOneSpotDetails } from '../../store/spots';
 import OpenModalButton from '../OpenModalButton';
 import ReviewModal from '../ReviewModal';
-import Map from '../Map';
-import SpotsMap from '../Map';
+
 import ImageGallery from './ImageGallery';
 function SetOneSPot () {
   const { spotId } = useParams()
@@ -20,26 +19,14 @@ function SetOneSPot () {
   const singleSpot =useSelector (state => state.spots.singleSpot)
   const spots = useSelector(state => Object.values(state.spots.allSpots))
 
-    const dispatch = useDispatch()
- 
-  // useEffect(() => {
-  //   dispatch(setAllSpots())
-  // }, [])
+    const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(setOneSpotDetails(Number(spotId)))
     dispatch(reviewMakerFunc(spotId))
     dispatch(setAllSpots())
   },[dispatch] )  
-  // useEffect(() => {
-    
-  // }, [])
 
-  // if (!spot) {
-  //   return null
-  // // }
-  // if (spot === undefined){
-  //   return null
-  // }
   if(!singleSpot.Owner){
     return null
   }
