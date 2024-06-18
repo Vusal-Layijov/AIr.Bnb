@@ -676,11 +676,11 @@ router.get('/:spotId/bookings',requireAuth, async(req,res,next)=>{
         next(err)
     }
     let Owner = await spot.getUser()
-    console.log(Owner.id,req.user.id)
     if(Owner.id !== req.user.id){
         let Bookings = await Spot.findByPk(req.params.spotId,
           {
-            include:{model:Booking,
+            include:{
+                model:Booking,
                 attributes:['spotId','startDate','endDate']
             },
             attributes: [] 
@@ -692,7 +692,7 @@ router.get('/:spotId/bookings',requireAuth, async(req,res,next)=>{
         )
     }
     else if (Owner.id == req.user.id){
-        let Bookings = await Spot.findByPk(req.params.spotId,{
+        let bookings = await Spot.findByPk(req.params.spotId,{
             include:{
                 model:Booking,
                 include:{
@@ -705,7 +705,7 @@ router.get('/:spotId/bookings',requireAuth, async(req,res,next)=>{
 
         )
         res.json(
-            Bookings
+            bookings
         )
     }
    
