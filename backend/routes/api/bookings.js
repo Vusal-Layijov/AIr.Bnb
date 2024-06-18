@@ -103,7 +103,6 @@ router.put('/:bookingId', requireAuth, async (req,res,next)=>{
         let bookingStartSec = bookingStart.getTime()
         let bookingEnd = new Date(booking.startDate)
         let bookingEndSec = bookingEnd.getTime()
-        console.log(bookingStartSec, bookingEndSec)
         if (start == bookingStartSec || start == bookingEndSec || end == bookingStartSec || end == bookingEndSec) {
             let err = new Error('Sorry, this spot is already booked for the specified date')
             err.status = 403

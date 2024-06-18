@@ -29,7 +29,6 @@ export const reviewMakerFunc = (spotId) => async dispatch => {
     return response
 }
 export const reviewAdderFunc = (newReview, spotId) => async dispatch => {
-    console.log("reached addNewReview Thunk")
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: "POST",
         headers: {
