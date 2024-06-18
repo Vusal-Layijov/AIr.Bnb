@@ -35,17 +35,13 @@
     margin-bottom: 20px;
 }
 .forBook label {
-    /* display: inline-block; */
-    /* margin-right: 10px; */
-    /* font-size: 1.2rem; */
+
     width: 100px;
     
   
 }
 .forBook input[type="radio"] {
-    /* display: inline-block; */
-    /* margin-right: 5px; */
-    /* vertical-align: middle; */
+
     cursor: pointer;
     width: 20px;
     

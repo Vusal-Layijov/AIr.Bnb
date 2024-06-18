@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, Route, useParams } from 'react-router-dom';
 import { setAllSpots } from '../../store/spots';
 import './index.css'
-import SpotsMap from '../Map';
 
 export default function AllSpotsDetails() {
     const dispatch = useDispatch()
@@ -32,7 +31,7 @@ export default function AllSpotsDetails() {
                    <div>{spot.avgRating ? `⭐️ ${parseFloat(spot.avgRating).toFixed(1)}` : '⭐️ New'}</div>
                     </div>
                     <div>
-                   <p>${spot.price} night</p> 
+                   <p>${spot.price} Night</p> 
                     </div>
                 </div>
               </NavLink>

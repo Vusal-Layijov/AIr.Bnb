@@ -9,8 +9,6 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
-     *
-     * Example:
      * await queryInterface.bulkInsert('People', [{
      *   name: 'John Doe',
      *   isBetaMember: false
@@ -25,7 +23,7 @@ module.exports = {
      },
      {
        spotId: 2,
-       url: 'https://joycerey.com/wp-content/uploads/2020/07/blogs-1395.jpg',
+       url: 'https://www.architectureartdesigns.com/wp-content/uploads/2014/12/1357.jpg',
        preview: true
      },
      {
